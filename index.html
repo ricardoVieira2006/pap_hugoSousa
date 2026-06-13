@@ -10,199 +10,134 @@
             --fundo: #f9f7f3;
             --texto: #2c2c2c;
             --primaria: #1e5f5f;
-            --primaria-clara: #2d8a7e;
             --destaque: #f4a261;
-            --destaque-forte: #e76f51;
-            --verde-suave: #e9f5f2;
-            --card: #ffffff;
-            --sombra: 0 8px 30px rgba(0,0,0,0.06);
-            --sombra-hover: 0 12px 36px rgba(0,0,0,0.1);
-            --borda: #e0dcd3;
-            --fonte: 'Nunito', 'Verdana', sans-serif;
+            --card: #fff;
+            --sombra: 0 8px 24px rgba(0,0,0,0.06);
+            --borda: #ddd6c8;
+            --fonte: 'Nunito', sans-serif;
             --nav-height: 70px;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: var(--fundo);
-            color: var(--texto);
-            font-family: var(--fonte);
-            font-size: 1.05rem;
-            line-height: 1.6;
-            padding-bottom: var(--nav-height);
-            -webkit-font-smoothing: antialiased;
-        }
-        :focus-visible { outline: 4px solid var(--destaque); outline-offset: 3px; border-radius: 12px; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--fundo); font-family: var(--fonte); color: var(--texto); padding-bottom: var(--nav-height); }
         .app { max-width: 850px; margin: 0 auto; padding: 1.2rem; min-height: 100vh; }
         .cabecalho {
-            background: linear-gradient(135deg, #1e5f5f 0%, #2a8a7a 100%);
-            border-radius: 30px; padding: 1.5rem 2rem; margin-bottom: 1.8rem;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-            gap: 1rem; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #1e5f5f, #2a8a7a); border-radius: 30px;
+            padding: 1.5rem; margin-bottom: 1.8rem; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         .logo { font-size: 1.9rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
-        .pontos-totais {
-            background: rgba(255,255,255,0.25); backdrop-filter: blur(8px);
-            border-radius: 40px; padding: 0.5rem 1.5rem; font-weight: 700;
-            font-size: 1.4rem; display: flex; align-items: center; gap: 0.4rem;
-            border: 1px solid rgba(255,255,255,0.4);
-        }
-        .btn-admin {
-            background: rgba(255,255,255,0.2); border: none; color: white;
-            font-size: 1.5rem; cursor: pointer; border-radius: 50%; width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center; transition: 0.2s;
-        }
-        .btn-admin:hover { background: rgba(255,255,255,0.4); }
+        .btn-admin { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.5rem; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
         .nav-principal {
-            display: flex; justify-content: space-around; background: white;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.06); position: fixed; bottom: 0;
-            left: 0; right: 0; height: var(--nav-height); z-index: 100;
-            border-top: 1px solid var(--borda);
+            position: fixed; bottom:0; left:0; right:0; background: white; display: flex;
+            justify-content: space-around; box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+            border-top:1px solid var(--borda); height: var(--nav-height); z-index: 100;
         }
         .nav-item {
             background: none; border: none; font-size: 0.9rem; color: #777;
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; cursor: pointer; transition: all 0.2s;
-            flex: 1; font-weight: 700; gap: 0.25rem; font-family: var(--fonte); padding: 0.5rem 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: 600; gap: 0.2rem; flex:1; padding: 0.5rem 0;
         }
-        .nav-item .emoji { font-size: 1.6rem; }
         .nav-item.ativo { color: var(--primaria); }
-        .nav-item.ativo .emoji { transform: scale(1.15); }
-        @media (min-width: 750px) {
-            .nav-principal {
-                position: static; background: transparent; box-shadow: none;
-                border: none; margin-bottom: 2rem; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
-            }
-            body { padding-bottom: 0; }
-            .nav-item {
-                font-size: 1.1rem; flex: 0 1 auto; padding: 0.6rem 1.4rem;
-                border-radius: 40px; background: white; box-shadow: var(--sombra); margin: 0.2rem; color: var(--texto);
-            }
-            .nav-item.ativo { background: var(--primaria); color: white; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-            .nav-item .emoji { font-size: 1.3rem; }
-        }
-        .aba { display: none; animation: fadeSlide 0.3s ease; }
+        .aba { display: none; animation: fadeSlide 0.3s; }
         .aba.ativa { display: block; }
-        @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .card {
-            background: var(--card); border-radius: 24px; padding: 1.8rem;
-            margin-bottom: 1.5rem; box-shadow: var(--sombra); border: 1px solid var(--borda);
-            transition: box-shadow 0.3s;
-        }
-        .card:hover { box-shadow: var(--sombra-hover); }
-        .card h2 { font-size: 1.7rem; color: var(--primaria); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 800; }
-        .card h3 { font-size: 1.3rem; color: #1e5f5f; margin: 1rem 0 0.5rem; font-weight: 700; }
+        @keyframes fadeSlide { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+        .card { background: var(--card); border-radius: 24px; padding: 1.8rem; margin-bottom: 1.5rem; box-shadow: var(--sombra); border: 1px solid var(--borda); }
         .btn {
             background: var(--primaria); color: white; border: none; border-radius: 40px;
-            padding: 0.7rem 1.8rem; font-size: 1.05rem; font-weight: 700; cursor: pointer;
-            transition: all 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-family: var(--fonte);
+            padding: 0.7rem 1.5rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+            display: inline-flex; align-items: center; gap: 0.4rem; font-size: 1rem;
         }
-        .btn:hover { background: var(--primaria-clara); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.15); }
-        .btn-outline { background: transparent; color: var(--primaria); border: 2px solid var(--primaria); box-shadow: none; }
-        .btn-outline:hover { background: var(--verde-suave); color: #1e5f5f; }
-        .btn-grande { padding: 1rem 2rem; font-size: 1.25rem; width: 100%; justify-content: center; border-radius: 50px; }
-        .btn-destaque { background: var(--destaque); box-shadow: 0 5px 15px rgba(244,162,97,0.3); }
-        .btn-destaque:hover { background: var(--destaque-forte); }
-        .btn-danger { background: #c44; }
-        .btn-danger:hover { background: #a33; }
-        .calendario-container { display: flex; flex-direction: column; align-items: center; }
-        .cal-nav { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.2rem; font-size: 1.4rem; font-weight: 800; color: var(--primaria); }
-        .cal-nav button { background: var(--verde-suave); color: var(--primaria); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.4rem; cursor: pointer; transition: 0.2s; font-weight: bold; }
-        .cal-nav button:hover { background: var(--primaria); color: white; }
-        table.calendario { width: 100%; border-collapse: collapse; text-align: center; font-size: 1rem; }
-        table.calendario th { color: var(--primaria); padding: 0.8rem 0.3rem; font-weight: 800; }
-        table.calendario td { padding: 0.8rem 0.3rem; border-radius: 16px; cursor: pointer; font-weight: 600; transition: all 0.2s; position: relative; }
-        table.calendario td:hover { background: #e0f0ec; transform: scale(1.05); }
-        table.calendario td.hoje { background: #fef2e5; border: 3px solid var(--destaque); font-weight: 800; }
-        table.calendario td.tem-treino { background: #d4ede6; font-weight: 700; }
-        table.calendario td.tem-treino::after { content: "✓"; position: absolute; top: 4px; right: 6px; font-size: 0.7rem; color: var(--primaria); font-weight: bold; }
-        table.calendario td.vazio { background: transparent; cursor: default; }
-        .lista-exercicios-dia { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.8rem; }
-        .exercicio-dia { display: flex; justify-content: space-between; align-items: center; background: #f7f5f0; border-radius: 18px; padding: 1rem 1.2rem; flex-wrap: wrap; gap: 0.8rem; transition: 0.2s; }
-        .exercicio-dia:hover { background: #edf7f3; }
-        .exercicio-dia .info { display: flex; align-items: center; gap: 0.8rem; font-size: 1.15rem; font-weight: 700; }
-        .exercicio-dia .acoes { display: flex; gap: 0.5rem; }
-        .grid-exercicios { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-        .card-exercicio {
-            background: #fff; border-radius: 20px; padding: 1.2rem 1rem; text-align: center;
-            cursor: pointer; transition: all 0.25s; border: 2px solid var(--borda);
-            box-shadow: var(--sombra); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+        .btn:hover { background: #2a7a6e; }
+        .btn-outline { background: transparent; color: var(--primaria); border: 2px solid var(--primaria); }
+        .btn-danger { background: #c44; } .btn-danger:hover { background: #a33; }
+        input, select, textarea {
+            width: 100%; padding: 0.7rem; border-radius: 14px; border: 2px solid #ccc;
+            font-family: var(--fonte); font-size: 1rem; margin: 0.3rem 0 0.8rem;
         }
-        .card-exercicio:hover { transform: translateY(-6px); border-color: var(--destaque); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
-        .card-exercicio .emoji-grande { font-size: 2.8rem; }
+        label { font-weight: 700; display: block; margin-top: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+        .card-ex {
+            background: white; border-radius: 20px; padding: 1.2rem; text-align: center;
+            border: 2px solid var(--borda); cursor: pointer; transition: 0.2s;
+        }
+        .card-ex:hover { transform: translateY(-5px); border-color: var(--destaque); }
+        .timer-display { font-size: 3rem; font-weight: 800; color: var(--primaria); text-align: center; font-family: monospace; }
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); z-index: 200;
+            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); z-index:200;
             align-items: center; justify-content: center;
         }
         .modal.ativo { display: flex; }
         .modal-conteudo {
             background: white; border-radius: 28px; padding: 1.8rem; max-width: 650px;
             width: 94%; max-height: 85vh; overflow-y: auto; position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
-        .modal-fechar { position: absolute; top: 12px; right: 18px; font-size: 2.2rem; background: none; border: none; cursor: pointer; color: #888; transition: 0.2s; line-height: 1; }
-        .modal-fechar:hover { color: #333; transform: rotate(90deg); }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; background: #000; margin: 1rem 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .timer-display { font-size: 3.2rem; font-weight: 800; color: var(--primaria); text-align: center; font-family: monospace; letter-spacing: 2px; }
-        .msg-sucesso { background: #e0f7e9; border-radius: 16px; padding: 1rem; text-align: center; font-weight: 700; color: #1e5f5f; margin: 1rem 0; }
-        .desafio-card { background: linear-gradient(135deg, #fff3e0, #ffe6d5); border-radius: 24px; padding: 1.8rem; text-align: center; margin-bottom: 1.5rem; border: 2px dashed var(--destaque); }
-        .progresso-barra { background: #e0e0e0; border-radius: 12px; height: 12px; margin: 1rem 0; overflow: hidden; }
-        .progresso-preenchimento { height: 100%; background: var(--destaque); border-radius: 12px; transition: width 0.4s ease; }
+        .modal-fechar {
+            position: absolute; top: 12px; right: 18px; font-size: 2.2rem;
+            background: none; border: none; cursor: pointer; color: #888;
+        }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height:0; overflow: hidden; border-radius: 16px; margin: 1rem 0; }
+        .video-wrapper iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
         .oculto { display: none !important; }
-        input, select, textarea {
-            width: 100%; padding: 0.7rem; border-radius: 14px; border: 2px solid #ccc;
-            font-family: var(--fonte); font-size: 1rem; margin: 0.4rem 0 1rem; transition: 0.2s;
-        }
-        input:focus, textarea:focus, select:focus { border-color: var(--primaria); outline: none; }
-        label { font-weight: 700; display: block; margin-top: 0.5rem; }
-        @media (max-width: 500px) {
-            .cabecalho { padding: 1rem; }
-            .logo { font-size: 1.5rem; }
-            .pontos-totais { font-size: 1.1rem; padding: 0.4rem 1rem; }
-            .timer-display { font-size: 2.5rem; }
-        }
     </style>
 </head>
 <body>
 <div class="app" id="appGeral">
-    <!-- Cabeçalho (comum) -->
-    <div class="cabecalho">
-        <div class="logo"><span>🏠💪</span> Movimento em Casa</div>
-        <div class="pontos-totais" id="pontosDisplay">⭐ 0 pontos</div>
-        <button class="btn-admin" id="btnAdmin" title="Administração" onclick="mostrarAdmin()">🔧</button>
+    <!-- ============ TELA DE LOGIN / REGISTO ============ -->
+    <div id="telaAuth" class="card">
+        <h2>👤 Aceder ao Movimento em Casa</h2>
+        <div id="formLogin">
+            <label>Email</label><input type="email" id="loginEmail">
+            <label>Palavra‑passe</label><input type="password" id="loginSenha">
+            <button class="btn" onclick="login()">Entrar</button>
+            <p style="margin-top:0.5rem;">Não tem conta? <a href="#" onclick="mostrarRegisto()">Criar conta</a></p>
+        </div>
+        <div id="formRegisto" class="oculto">
+            <label>Nome</label><input type="text" id="regNome">
+            <label>Idade</label><input type="number" id="regIdade" min="50" max="120">
+            <label>Sexo</label><select id="regSexo"><option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select>
+            <label>Email</label><input type="email" id="regEmail">
+            <label>Palavra‑passe</label><input type="password" id="regSenha">
+            <button class="btn" onclick="registar()">Criar conta</button>
+            <p style="margin-top:0.5rem;">Já tem conta? <a href="#" onclick="mostrarLogin()">Entrar</a></p>
+        </div>
+        <p id="msgAuth" class="oculto" style="margin-top:1rem; font-weight:700;"></p>
     </div>
 
-    <!-- Abas normais (idoso) -->
-    <div id="interfaceIdoso">
+    <!-- ============ INTERFACE PRINCIPAL (oculta até login) ============ -->
+    <div id="interfaceApp" class="oculto">
+        <div class="cabecalho">
+            <div class="logo"><span>🏠💪</span> Movimento em Casa</div>
+            <div style="display:flex; gap:1rem; align-items:center;">
+                <span id="pontosDisplayCab" style="font-weight:700;">⭐ 0</span>
+                <span id="nomeUser" style="font-weight:700;"></span>
+                <button class="btn-admin" onclick="mostrarAdmin()" title="Admin">🔧</button>
+            </div>
+        </div>
+
+        <!-- Abas -->
         <div class="aba ativa" id="aba-inicio">
-            <div class="card"><h2>👋 Bem-vindo(a)!</h2><p>Explore o Calendário, Exercícios e Desafios para ganhar pontos!</p><button class="btn" onclick="mudarAba('calendario')">📅 Começar</button></div>
+            <div class="card"><h2>👋 Bem-vindo(a)!</h2><p>Explore o Calendário e os Exercícios.</p></div>
         </div>
         <div class="aba" id="aba-calendario">
             <div class="card"><h2>📅 Calendário</h2><div id="calendarioContainer"></div><div id="detalhesDia"></div></div>
         </div>
         <div class="aba" id="aba-exercicios">
-            <div class="card"><h2>🤸 Exercícios</h2><div class="grid-exercicios" id="catalogoExercicios"></div></div>
-        </div>
-        <div class="aba" id="aba-desafios">
-            <div class="card desafio-card" id="desafioDiarioContainer"></div>
-            <div class="card"><h3>🏅 Progresso</h3><div id="progressoDesafio"></div></div>
+            <div class="card"><h2>🤸 Exercícios</h2><div class="grid" id="catalogoExercicios"></div></div>
         </div>
         <div class="aba" id="aba-pontos">
-            <div class="card"><h2>🏆 Pontos</h2><div style="font-size:3rem; text-align:center;" id="pontosGrandes">⭐ 0</div><p>+1 por treino, +2 repetições, +5 rápido, +10 desafio.</p><button class="btn-outline btn" onclick="resetarPontos()">🔄 Reiniciar</button></div>
+            <div class="card"><h2>🏆 Pontos</h2><div style="font-size:3rem; text-align:center;" id="pontosGrandes">⭐ 0</div><p>+1 por treino, +2 repetições, +5 rápido.</p></div>
         </div>
     </div>
 
     <!-- Interface Admin (oculta) -->
     <div id="interfaceAdmin" class="oculto">
         <div class="card" style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>🔧 Painel Admin</h2>
-            <button class="btn btn-outline" onclick="esconderAdmin()">Voltar ao site</button>
+            <h2>🔧 Admin</h2><button class="btn btn-outline" onclick="esconderAdmin()">Voltar</button>
         </div>
-        <div class="card"><h3>🏋️ Exercícios</h3><div class="exercicio-lista" id="listaExerciciosAdmin"></div><button class="btn" onclick="mostrarFormAdicionar()">➕ Novo</button></div>
+        <div class="card"><h3>Exercícios</h3><div id="listaExerciciosAdmin"></div><button class="btn" onclick="mostrarFormAdicionar()">➕ Novo</button></div>
         <div class="card oculto" id="formExercicioAdmin">
-            <h3 id="tituloFormAdmin">➕ Adicionar</h3>
             <label>Nome</label><input type="text" id="nomeEx">
             <label>Emoji</label><input type="text" id="emojiEx">
             <label>Descrição</label><textarea id="descEx" rows="3"></textarea>
@@ -211,38 +146,33 @@
             <button class="btn" onclick="salvarExercicioAdmin()">💾 Guardar</button>
             <button class="btn btn-outline" onclick="cancelarFormAdmin()">Cancelar</button>
         </div>
-        <div class="card"><h3>📋 Registos</h3><div id="listaTreinosAdmin"></div><button class="btn btn-danger" onclick="limparTreinosAdmin()">🗑️ Apagar treinos</button></div>
-        <div class="card"><h3>⚙️ Configurações</h3><label>Nova senha</label><input type="password" id="novaSenhaAdmin"><button class="btn" onclick="alterarSenhaAdmin()">Actualizar</button><button class="btn btn-danger" onclick="resetarTudoAdmin()">⚠️ Reset total</button></div>
+        <div class="card"><h3>Utilizadores</h3><div id="listaUsersAdmin"></div></div>
     </div>
 </div>
 
-<!-- Navegação (escondida no admin) -->
+<!-- Navegação inferior -->
 <nav class="nav-principal" id="navPrincipal">
-    <button class="nav-item ativo" onclick="mudarAba('inicio')"><span class="emoji">🏠</span>Início</button>
-    <button class="nav-item" onclick="mudarAba('calendario')"><span class="emoji">📅</span>Calendário</button>
-    <button class="nav-item" onclick="mudarAba('exercicios')"><span class="emoji">🤸</span>Exercícios</button>
-    <button class="nav-item" onclick="mudarAba('desafios')"><span class="emoji">🏆</span>Desafios</button>
-    <button class="nav-item" onclick="mudarAba('pontos')"><span class="emoji">⭐</span>Pontos</button>
+    <button class="nav-item ativo" onclick="mudarAba('inicio')">🏠 Início</button>
+    <button class="nav-item" onclick="mudarAba('calendario')">📅 Calendário</button>
+    <button class="nav-item" onclick="mudarAba('exercicios')">🤸 Exercícios</button>
+    <button class="nav-item" onclick="mudarAba('pontos')">⭐ Pontos</button>
 </nav>
 
 <!-- Modais -->
 <div class="modal" id="modalVideo"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalVideo')">×</button><h3 id="modalVideoTitulo"></h3><p id="modalVideoDesc"></p><div class="video-wrapper" id="modalVideoWrapper"></div></div></div>
-<div class="modal" id="modalAdicionar"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalAdicionar')">×</button><h3>➕ Escolha um exercício</h3><div class="grid-exercicios" id="gridAdicionarExercicios"></div></div></div>
-<div class="modal" id="modalTreino"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModalTreino()">×</button><h3 id="modalTitulo"></h3><div class="video-wrapper" id="videoWrapperTreino"></div><div class="timer-display" id="timerDisplay">00:00</div><div style="display:flex; gap:0.5rem; justify-content:center; margin:1rem 0;"><button class="btn" id="btnIniciarTimer">▶ Iniciar</button><button class="btn btn-outline" id="btnPausarTimer">⏸ Pausar</button><button class="btn btn-outline" id="btnResetTimer">↺ Reiniciar</button></div><button class="btn btn-grande" id="btnConcluir">✅ Concluir (+1 ponto)</button><div id="bonusContainer" style="display:none; margin-top:1rem;"><p>🎉 Ganhou 1 ponto. Mais?</p><button class="btn" onclick="adicionarBonus(2)">➕ +2 repetições</button><button class="btn btn-destaque" onclick="adicionarBonus(5)" style="margin-left:0.5rem;">⚡ +5 rápido</button></div></div></div>
-<!-- Modal de login admin -->
-<div class="modal" id="modalAdminLogin"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalAdminLogin')">×</button><h3>🔐 Admin</h3><input type="password" id="senhaAdminInput" placeholder="Palavra‑passe"><button class="btn" onclick="loginAdmin()">Entrar</button><p id="msgAdminLogin" class="msg-sucesso oculto"></p></div></div>
+<div class="modal" id="modalAdicionar"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalAdicionar')">×</button><h3>➕ Adicionar ao dia</h3><div class="grid" id="gridAdicionar"></div></div></div>
+<div class="modal" id="modalTreino"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModalTreino()">×</button><h3 id="modalTitulo"></h3><div class="video-wrapper" id="videoWrapperTreino"></div><div class="timer-display" id="timerDisplay">00:00</div><div style="display:flex; gap:0.5rem; justify-content:center; margin:1rem 0;"><button class="btn" id="btnIniciarTimer">▶ Iniciar</button><button class="btn btn-outline" id="btnPausarTimer">⏸ Pausar</button><button class="btn btn-outline" id="btnResetTimer">↺ Reiniciar</button></div><button class="btn" style="width:100%;" id="btnConcluir">✅ Concluir (+1)</button><div id="bonusContainer" style="display:none; margin-top:1rem;"><p>🎉 +1 ponto. Mais?</p><button class="btn" onclick="adicionarBonus(2)">➕ +2</button><button class="btn" onclick="adicionarBonus(5)" style="margin-left:0.5rem;">⚡ +5</button></div></div></div>
 
 <script>
-(function() {
-    // ============ DADOS ============
-    const STORAGE_EXERCICIOS = 'exerciciosCatalogo';
-    const STORAGE_TREINOS = 'treinosMovimento';
-    const STORAGE_PONTOS = 'pontosTotal';
-    const STORAGE_SENHA = 'adminSenha';
-    const STORAGE_DESAFIO = 'desafioAtual';
-    const STORAGE_PROGRESSO = 'progressoDesafio';
+// ---------- DADOS INICIAIS ----------
+const STORAGE_USERS = 'mv_users';
+const STORAGE_EXERCICIOS = 'mv_exercicios';
+const STORAGE_TREINOS = 'mv_treinos';
+const STORAGE_ADMIN_SENHA = 'mv_admin_senha';
 
-    const exerciciosPadrao = [
+// Inicializa se não existir
+if (!localStorage.getItem(STORAGE_EXERCICIOS)) {
+    const padrao = [
         { id: 'caminhar', nome: 'Caminhar em casa', emoji: '🚶‍♂️', desc: 'Caminhe 5–10 min, várias vezes ao dia.', videoId: 'L4BzFh9kQQY' },
         { id: 'levantar', nome: 'Levantar e Sentar', emoji: '🪑', desc: '8–10 repetições.', videoId: '8m5H0W0Q0Xs' },
         { id: 'bracos', nome: 'Elevar os Braços', emoji: '🙆', desc: 'Com ou sem garrafas.', videoId: '6gV9v7JxK8Y' },
@@ -252,369 +182,351 @@
         { id: 'ombros', nome: 'Rotação de Ombros', emoji: '🔄', desc: '10 voltas cada lado.', videoId: 'r6s7t8u9v0w' },
         { id: 'pernas', nome: 'Flexão de Pernas', emoji: '🦵', desc: 'Sentado, estique e dobre.', videoId: 'x1y2z3a4b5c' },
     ];
-    const desafiosDiarios = [
-        { desc: 'Complete 3 exercícios diferentes hoje', meta: 3, tipo: 'diferentes' },
-        { desc: 'Acumule 15 minutos de atividade', meta: 15, tipo: 'minutos' },
-        { desc: 'Conclua 2 treinos de equilíbrio', meta: 2, tipo: 'especifico', id: 'equilibrio' },
-        { desc: 'Faça 4 exercícios no total', meta: 4, tipo: 'total' },
-    ];
+    localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(padrao));
+}
+if (!localStorage.getItem(STORAGE_ADMIN_SENHA)) {
+    localStorage.setItem(STORAGE_ADMIN_SENHA, 'admin123');
+}
 
-    // inicializar localStorage
-    if (!localStorage.getItem(STORAGE_SENHA)) localStorage.setItem(STORAGE_SENHA, 'admin123');
-    if (!localStorage.getItem(STORAGE_EXERCICIOS)) localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exerciciosPadrao));
+// ---------- ESTADO ----------
+let usuarioAtual = null;
+let exerciciosCatalogo = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS)) || [];
+let treinosCache = {};
 
-    let exerciciosCatalogo = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS));
-    let pontosTotal = parseInt(localStorage.getItem(STORAGE_PONTOS)) || 0;
-    let treinos = JSON.parse(localStorage.getItem(STORAGE_TREINOS)) || {};
-    let desafioAtual = JSON.parse(localStorage.getItem(STORAGE_DESAFIO)) || null;
-    let progressoDesafio = JSON.parse(localStorage.getItem(STORAGE_PROGRESSO)) || {};
+// ---------- AUTENTICAÇÃO ----------
+function mostrarMsgAuth(msg, erro) {
+    const p = document.getElementById('msgAuth');
+    p.textContent = msg;
+    p.classList.remove('oculto');
+    p.style.color = erro ? '#c44' : '#1e5f5f';
+}
+function mostrarRegisto() {
+    document.getElementById('formLogin').classList.add('oculto');
+    document.getElementById('formRegisto').classList.remove('oculto');
+    document.getElementById('msgAuth').classList.add('oculto');
+}
+function mostrarLogin() {
+    document.getElementById('formRegisto').classList.add('oculto');
+    document.getElementById('formLogin').classList.remove('oculto');
+    document.getElementById('msgAuth').classList.add('oculto');
+}
 
-    const hoje = new Date();
-    const hojeStr = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}-${String(hoje.getDate()).padStart(2,'0')}`;
+window.login = function() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const senha = document.getElementById('loginSenha').value;
+    const users = JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+    const user = users.find(u => u.email === email && u.senha === senha);
+    if (!user) return mostrarMsgAuth('Email ou senha inválidos.', true);
+    usuarioAtual = user;
+    localStorage.setItem('mv_usuario_atual', JSON.stringify(user));
+    entrarApp();
+};
 
-    if (!desafioAtual || desafioAtual.data !== hojeStr) {
-        const indice = Math.floor(Math.random() * desafiosDiarios.length);
-        desafioAtual = { data: hojeStr, ...desafiosDiarios[indice] };
-        progressoDesafio = { concluido: false, valor: 0, bonusRecebido: false };
-        localStorage.setItem(STORAGE_DESAFIO, JSON.stringify(desafioAtual));
-        localStorage.setItem(STORAGE_PROGRESSO, JSON.stringify(progressoDesafio));
-    }
-
-    // ============ UI ============
-    const pontosDisplay = document.getElementById('pontosDisplay');
-    const pontosGrandes = document.getElementById('pontosGrandes');
-    const calendarioContainer = document.getElementById('calendarioContainer');
-    const detalhesDia = document.getElementById('detalhesDia');
-    const catalogoExerciciosDiv = document.getElementById('catalogoExercicios');
-    const gridAdicionar = document.getElementById('gridAdicionarExercicios');
-    const desafioDiarioContainer = document.getElementById('desafioDiarioContainer');
-    const progressoDesafioDiv = document.getElementById('progressoDesafio');
-    const navPrincipal = document.getElementById('navPrincipal');
-    const interfaceIdoso = document.getElementById('interfaceIdoso');
-    const interfaceAdmin = document.getElementById('interfaceAdmin');
-
-    // Modal Treino
-    const modalTreino = document.getElementById('modalTreino');
-    const modalTitulo = document.getElementById('modalTitulo');
-    const videoWrapperTreino = document.getElementById('videoWrapperTreino');
-    const timerDisplay = document.getElementById('timerDisplay');
-    const btnIniciar = document.getElementById('btnIniciarTimer');
-    const btnPausar = document.getElementById('btnPausarTimer');
-    const btnReset = document.getElementById('btnResetTimer');
-    const btnConcluir = document.getElementById('btnConcluir');
-    const bonusContainer = document.getElementById('bonusContainer');
-
-    let timerInterval = null, segundosTimer = 0, timerAtivo = false;
-    let treinoAtual = null;
-
-    // ============ FUNÇÕES GERAIS ============
-    window.fecharModal = function(id) { document.getElementById(id).classList.remove('ativo'); };
-    window.addEventListener('click', (e) => { if (e.target.classList.contains('modal') && e.target.classList.contains('ativo')) e.target.classList.remove('ativo'); });
-
-    function atualizarPontosUI() {
-        pontosDisplay.textContent = `⭐ ${pontosTotal} pontos`;
-        if (pontosGrandes) pontosGrandes.textContent = `⭐ ${pontosTotal}`;
-    }
-    function adicionarPontos(qtde) {
-        pontosTotal += qtde;
-        localStorage.setItem(STORAGE_PONTOS, pontosTotal);
-        atualizarPontosUI();
-    }
-    window.resetarPontos = function() {
-        if (confirm('Reiniciar pontos?')) { pontosTotal = 0; localStorage.setItem(STORAGE_PONTOS, 0); atualizarPontosUI(); }
+window.registar = function() {
+    const nome = document.getElementById('regNome').value.trim();
+    const idade = document.getElementById('regIdade').value;
+    const sexo = document.getElementById('regSexo').value;
+    const email = document.getElementById('regEmail').value.trim();
+    const senha = document.getElementById('regSenha').value;
+    if (!nome || !email || !senha) return mostrarMsgAuth('Preencha os campos obrigatórios.', true);
+    const users = JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+    if (users.some(u => u.email === email)) return mostrarMsgAuth('Este email já está registado.', true);
+    const novo = {
+        id: Date.now().toString(),
+        nome,
+        idade: idade || '',
+        sexo: sexo || '',
+        email,
+        senha,
+        pontos: 0
     };
+    users.push(novo);
+    localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+    mostrarMsgAuth('Conta criada! Pode fazer login.', false);
+    mostrarLogin();
+};
 
-    function salvarTreinos() { localStorage.setItem(STORAGE_TREINOS, JSON.stringify(treinos)); }
-
-    window.adicionarExercicioDia = function(dataStr, exerciseId) {
-        if (!treinos[dataStr]) treinos[dataStr] = [];
-        if (!treinos[dataStr].some(e => e.id === exerciseId)) {
-            treinos[dataStr].push({ id: exerciseId, status: 'planned', bonus: 0, duracao: 0 });
-            salvarTreinos();
-        }
-        renderizarCalendario();
-        window.mostrarDetalhesDia(dataStr);
-        atualizarDesafio();
-    };
-
-    window.removerExercicioDia = function(dataStr, index) {
-        treinos[dataStr].splice(index, 1);
-        if (treinos[dataStr].length === 0) delete treinos[dataStr];
-        salvarTreinos();
-        renderizarCalendario();
-        window.mostrarDetalhesDia(dataStr);
-        atualizarDesafio();
-    };
-
-    // ============ CALENDÁRIO ============
-    let mesAtual = new Date().getMonth();
-    let anoAtual = new Date().getFullYear();
-
-    function renderizarCalendario() {
-        const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-        const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
-        const ultimoDia = new Date(anoAtual, mesAtual+1, 0).getDate();
-        let html = `<div class="cal-nav"><button id="btnMesAnt">◀</button><span>${meses[mesAtual]} ${anoAtual}</span><button id="btnMesSeg">▶</button></div><table class="calendario"><thead><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr></thead><tbody>`;
-        let dia = 1;
-        for (let i = 0; i < 6; i++) {
-            html += '<tr>';
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < primeiroDia) html += '<td class="vazio"></td>';
-                else if (dia > ultimoDia) html += '<td class="vazio"></td>';
-                else {
-                    const dataStr = `${anoAtual}-${String(mesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-                    const tem = treinos[dataStr] && treinos[dataStr].some(e => e.status === 'completed') ? 'tem-treino' : '';
-                    const hojeClasse = dataStr === hojeStr ? 'hoje' : '';
-                    html += `<td class="${tem} ${hojeClasse}" data-data="${dataStr}" onclick="mostrarDetalhesDia('${dataStr}')">${dia}</td>`;
-                    dia++;
-                }
-            }
-            html += '</tr>';
-            if (dia > ultimoDia) break;
-        }
-        html += '</tbody></table>';
-        calendarioContainer.innerHTML = html;
-        document.getElementById('btnMesAnt').addEventListener('click', ()=>{ mesAtual--; if(mesAtual<0){mesAtual=11;anoAtual--;} renderizarCalendario(); });
-        document.getElementById('btnMesSeg').addEventListener('click', ()=>{ mesAtual++; if(mesAtual>11){mesAtual=0;anoAtual++;} renderizarCalendario(); });
-    }
-
-    window.mostrarDetalhesDia = function(dataStr) {
-        const [ano, mes, dia] = dataStr.split('-');
-        let lista = treinos[dataStr] || [];
-        let html = `<h3>${dia}/${mes}/${ano}</h3>`;
-        if (lista.length === 0) html += '<p>Nenhum exercício.</p>';
-        else {
-            html += '<div class="lista-exercicios-dia">';
-            lista.forEach((entry, idx) => {
-                const ex = exerciciosCatalogo.find(e => e.id === entry.id);
-                const nome = ex ? ex.nome : entry.id;
-                const statusIcon = entry.status === 'completed' ? '✅' : '⏳';
-                html += `<div class="exercicio-dia"><div class="info"><span>${ex?.emoji||'🏃'}</span>${nome} ${statusIcon}</div><div class="acoes">${entry.status!=='completed'?`<button class="btn" onclick="iniciarTreino('${dataStr}',${idx})">▶ Iniciar</button>`:''}<button class="btn-outline" onclick="removerExercicioDia('${dataStr}',${idx})">🗑️</button></div></div>`;
-            });
-            html += '</div>';
-        }
-        html += `<button class="btn" onclick="abrirModalAdicionar('${dataStr}')">➕ Adicionar</button>`;
-        detalhesDia.innerHTML = html;
-    };
-
-    window.abrirModalAdicionar = function(dataStr) {
-        gridAdicionar.innerHTML = exerciciosCatalogo.map(ex => `<div class="card-exercicio"><div class="emoji-grande">${ex.emoji}</div><strong>${ex.nome}</strong><p>${ex.desc}</p><button class="btn" onclick="adicionarExercicioDia('${dataStr}','${ex.id}'); fecharModal('modalAdicionar');">➕ Adicionar</button></div>`).join('');
-        document.getElementById('modalAdicionar').classList.add('ativo');
-    };
-
-    // ============ CATÁLOGO ============
-    function renderizarCatalogo() {
-        catalogoExerciciosDiv.innerHTML = exerciciosCatalogo.map(ex => `<div class="card-exercicio" onclick="abrirExplicacaoCatalogo('${ex.id}')"><div class="emoji-grande">${ex.emoji}</div><strong>${ex.nome}</strong><p>${ex.desc}</p><button class="btn btn-outline">▶ Ver vídeo</button></div>`).join('');
-    }
-    window.abrirExplicacaoCatalogo = function(exId) {
-        const ex = exerciciosCatalogo.find(e => e.id === exId);
-        if (!ex) return;
-        document.getElementById('modalVideoTitulo').textContent = `${ex.emoji} ${ex.nome}`;
-        document.getElementById('modalVideoDesc').textContent = ex.desc;
-        document.getElementById('modalVideoWrapper').innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
-        document.getElementById('modalVideo').classList.add('ativo');
-    };
-
-    // ============ TREINO ============
-    window.iniciarTreino = function(dataStr, entryIndex) {
-        const entry = treinos[dataStr][entryIndex];
-        const ex = exerciciosCatalogo.find(e => e.id === entry.id);
-        if (!ex) return;
-        treinoAtual = { dataStr, entryIndex, ex };
-        modalTitulo.textContent = `🏋️ ${ex.nome}`;
-        videoWrapperTreino.innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
-        resetarTimer();
-        bonusContainer.style.display = 'none';
-        btnConcluir.style.display = 'inline-flex';
-        modalTreino.classList.add('ativo');
-    };
-    function fecharModalTreino() { modalTreino.classList.remove('ativo'); pausarTimer(); treinoAtual = null; }
-    function resetarTimer() { pausarTimer(); segundosTimer = 0; timerDisplay.textContent = '00:00'; }
-    function iniciarTimer() { if(!timerAtivo){ timerAtivo=true; timerInterval=setInterval(()=>{ segundosTimer++; const m=Math.floor(segundosTimer/60); const s=segundosTimer%60; timerDisplay.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; },1000); } }
-    function pausarTimer() { if(timerAtivo){ clearInterval(timerInterval); timerAtivo=false; } }
-    btnIniciar.addEventListener('click', iniciarTimer);
-    btnPausar.addEventListener('click', pausarTimer);
-    btnReset.addEventListener('click', resetarTimer);
-    btnConcluir.addEventListener('click', ()=>{
-        if(!treinoAtual) return;
-        const { dataStr, entryIndex } = treinoAtual;
-        const entry = treinos[dataStr][entryIndex];
-        if(entry.status==='completed') return;
-        entry.status='completed'; entry.duracao=segundosTimer;
-        salvarTreinos(); adicionarPontos(1);
-        bonusContainer.style.display='block'; btnConcluir.style.display='none';
-        renderizarCalendario(); window.mostrarDetalhesDia(dataStr); atualizarDesafio();
-    });
-    window.adicionarBonus = function(qtde) {
-        if(!treinoAtual) return;
-        const { dataStr, entryIndex } = treinoAtual;
-        const entry = treinos[dataStr][entryIndex];
-        if(entry.bonus>=qtde) return;
-        entry.bonus=qtde; salvarTreinos(); adicionarPontos(qtde);
-        bonusContainer.innerHTML='<p class="msg-sucesso">🎉 +'+qtde+' pontos!</p>';
-        setTimeout(()=>{ bonusContainer.style.display='none'; },2500);
-    };
-    modalTreino.addEventListener('click', (e)=>{ if(e.target===modalTreino) fecharModalTreino(); });
-
-    // ============ DESAFIO ============
-    function atualizarDesafio() {
-        if(!desafioAtual || progressoDesafio.concluido) return;
-        let valor=0;
-        if(desafioAtual.tipo==='diferentes'){
-            const todos=treinos[hojeStr]||[]; valor=new Set(todos.filter(e=>e.status==='completed').map(e=>e.id)).size;
-        } else if(desafioAtual.tipo==='minutos'){
-            let totalSeg=0; if(treinos[hojeStr]) treinos[hojeStr].forEach(e=>{ if(e.status==='completed') totalSeg+=(e.duracao||0); });
-            valor=Math.floor(totalSeg/60);
-        } else if(desafioAtual.tipo==='especifico'){
-            const todos=treinos[hojeStr]||[]; valor=todos.filter(e=>e.status==='completed'&&e.id===desafioAtual.id).length;
-        } else if(desafioAtual.tipo==='total'){
-            const todos=treinos[hojeStr]||[]; valor=todos.filter(e=>e.status==='completed').length;
-        }
-        progressoDesafio.valor=valor;
-        if(valor>=desafioAtual.meta && !progressoDesafio.concluido){
-            progressoDesafio.concluido=true;
-            if(!progressoDesafio.bonusRecebido){ adicionarPontos(10); progressoDesafio.bonusRecebido=true; }
-        }
-        localStorage.setItem(STORAGE_PROGRESSO, JSON.stringify(progressoDesafio));
-        renderizarDesafio();
-    }
-    function renderizarDesafio() {
-        if(!desafioAtual) return;
-        const meta=desafioAtual.meta, valor=progressoDesafio.valor||0;
-        const perc=Math.min(100,Math.round((valor/meta)*100));
-        desafioDiarioContainer.innerHTML=`<h2>🏆 Desafio de Hoje</h2><p style="font-size:1.3rem;">${desafioAtual.desc}</p><div class="progresso-barra"><div class="progresso-preenchimento" style="width:${perc}%;"></div></div><p>${valor} / ${meta} ${desafioAtual.tipo==='minutos'?'minutos':''}</p>${progressoDesafio.concluido?'<p class="msg-sucesso">🎉 Completo! +10 pontos</p>':''}`;
-        progressoDesafioDiv.innerHTML='<p>Continue assim!</p>';
-    }
-
-    // ============ NAVEGAÇÃO ============
-    window.mudarAba = function(nome) {
-        document.querySelectorAll('#interfaceIdoso .aba').forEach(a => a.classList.remove('ativa'));
-        document.getElementById('aba-'+nome).classList.add('ativa');
-        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('ativo'));
-        const indices={inicio:0, calendario:1, exercicios:2, desafios:3, pontos:4};
-        document.querySelectorAll('.nav-item')[indices[nome]].classList.add('ativo');
-        if(nome==='calendario') renderizarCalendario();
-        if(nome==='exercicios') renderizarCatalogo();
-        if(nome==='desafios') renderizarDesafio();
-    };
-
-    // ============ ADMIN ============
-    window.mostrarAdmin = function() {
-        document.getElementById('modalAdminLogin').classList.add('ativo');
-        document.getElementById('senhaAdminInput').focus();
-    };
-    window.loginAdmin = function() {
-        const senha = document.getElementById('senhaAdminInput').value;
-        const correta = localStorage.getItem(STORAGE_SENHA);
-        if(senha === correta) {
-            document.getElementById('modalAdminLogin').classList.remove('ativo');
-            interfaceIdoso.classList.add('oculto');
-            interfaceAdmin.classList.remove('oculto');
-            navPrincipal.classList.add('oculto');
-            document.getElementById('senhaAdminInput').value = '';
-            renderizarAdminExercicios();
-            renderizarAdminTreinos();
-        } else {
-            alert('Senha incorreta!');
-        }
-    };
-    window.esconderAdmin = function() {
-        interfaceAdmin.classList.add('oculto');
-        interfaceIdoso.classList.remove('oculto');
-        navPrincipal.classList.remove('oculto');
-        renderizarCalendario(); renderizarCatalogo(); atualizarPontosUI();
-    };
-
-    function renderizarAdminExercicios() {
-        const lista = document.getElementById('listaExerciciosAdmin');
-        const exs = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS)) || [];
-        lista.innerHTML = exs.map((ex,i) => `
-            <div class="exercicio-dia">
-                <div class="info"><span style="font-size:1.8rem;">${ex.emoji}</span><div><strong>${ex.nome}</strong><p>${ex.desc}</p></div></div>
-                <div><button class="btn btn-outline" onclick="editarExercicioAdmin(${i})">✏️</button><button class="btn btn-danger" onclick="removerExercicioAdmin(${i})">🗑️</button></div>
-            </div>`).join('');
-    }
-    window.mostrarFormAdicionar = function() {
-        document.getElementById('tituloFormAdmin').textContent='➕ Novo Exercício';
-        document.getElementById('nomeEx').value=''; document.getElementById('emojiEx').value='';
-        document.getElementById('descEx').value=''; document.getElementById('videoIdEx').value='';
-        document.getElementById('editIndexEx').value='-1';
-        document.getElementById('formExercicioAdmin').classList.remove('oculto');
-    };
-    window.cancelarFormAdmin = function() { document.getElementById('formExercicioAdmin').classList.add('oculto'); };
-    window.editarExercicioAdmin = function(index) {
-        const exs = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS));
-        const ex = exs[index];
-        document.getElementById('tituloFormAdmin').textContent='✏️ Editar';
-        document.getElementById('nomeEx').value=ex.nome; document.getElementById('emojiEx').value=ex.emoji;
-        document.getElementById('descEx').value=ex.desc; document.getElementById('videoIdEx').value=ex.videoId;
-        document.getElementById('editIndexEx').value=index;
-        document.getElementById('formExercicioAdmin').classList.remove('oculto');
-    };
-    window.salvarExercicioAdmin = function() {
-        const nome=document.getElementById('nomeEx').value.trim(), emoji=document.getElementById('emojiEx').value.trim();
-        const desc=document.getElementById('descEx').value.trim(), videoId=document.getElementById('videoIdEx').value.trim();
-        if(!nome||!emoji||!desc||!videoId) { alert('Preencha todos.'); return; }
-        const exs = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS));
-        const novo={ id: nome.toLowerCase().replace(/\s+/g,'_'), nome, emoji, desc, videoId };
-        const idx=parseInt(document.getElementById('editIndexEx').value);
-        if(idx>=0&&idx<exs.length) exs[idx]=novo; else exs.push(novo);
-        localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exs));
-        exerciciosCatalogo = exs;
-        renderizarAdminExercicios();
-        document.getElementById('formExercicioAdmin').classList.add('oculto');
-        alert('Guardado!');
-    };
-    window.removerExercicioAdmin = function(index) {
-        if(!confirm('Remover?')) return;
-        const exs = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS));
-        exs.splice(index,1); localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exs));
-        exerciciosCatalogo = exs;
-        renderizarAdminExercicios();
-    };
-    function renderizarAdminTreinos() {
-        const lista = document.getElementById('listaTreinosAdmin');
-        const dados = JSON.parse(localStorage.getItem(STORAGE_TREINOS)) || {};
-        const datas = Object.keys(dados).sort().reverse();
-        lista.innerHTML = datas.length ? datas.map(d => `<li style="margin:0.5rem 0;">${d}: ${dados[d].filter(e=>e.status==='completed').length}/${dados[d].length} concluídos</li>`).join('') : '<p>Sem registos.</p>';
-    }
-    window.limparTreinosAdmin = function() {
-        if(confirm('Apagar todos os treinos e pontos?')) {
-            localStorage.removeItem(STORAGE_TREINOS); localStorage.removeItem(STORAGE_PONTOS);
-            treinos={}; pontosTotal=0; atualizarPontosUI(); renderizarAdminTreinos();
-        }
-    };
-    window.alterarSenhaAdmin = function() {
-        const nova = document.getElementById('novaSenhaAdmin').value.trim();
-        if(!nova) return alert('Digite nova senha.');
-        localStorage.setItem(STORAGE_SENHA, nova);
-        document.getElementById('novaSenhaAdmin').value='';
-        alert('Senha atualizada!');
-    };
-    window.resetarTudoAdmin = function() {
-        if(confirm('Reset total? Apagará tudo e restaurará exercícios padrão.')) {
-            localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exerciciosPadrao));
-            localStorage.removeItem(STORAGE_TREINOS); localStorage.removeItem(STORAGE_PONTOS);
-            localStorage.removeItem(STORAGE_DESAFIO); localStorage.removeItem(STORAGE_PROGRESSO);
-            exerciciosCatalogo = exerciciosPadrao;
-            treinos={}; pontosTotal=0;
-            atualizarPontosUI(); renderizarAdminExercicios(); renderizarAdminTreinos();
-            location.reload();
-        }
-    };
-
-    // ============ INICIALIZAÇÃO ============
+function entrarApp() {
+    document.getElementById('telaAuth').classList.add('oculto');
+    document.getElementById('interfaceApp').classList.remove('oculto');
+    document.getElementById('navPrincipal').classList.remove('oculto');
+    document.getElementById('nomeUser').textContent = usuarioAtual.nome;
+    // carregar treinos do user
+    const todosTreinos = JSON.parse(localStorage.getItem(STORAGE_TREINOS) || '{}');
+    treinosCache = todosTreinos[usuarioAtual.id] || {};
     atualizarPontosUI();
     renderizarCalendario();
     renderizarCatalogo();
-    renderizarDesafio();
-    window.mostrarDetalhesDia(hojeStr);
+}
 
-    // login no modal admin com Enter
-    document.getElementById('senhaAdminInput').addEventListener('keypress', (e) => { if(e.key==='Enter') window.loginAdmin(); });
-    // fechar modais com ESC
-    document.addEventListener('keydown', (e) => { if(e.key==='Escape') document.querySelectorAll('.modal.ativo').forEach(m=>m.classList.remove('ativo')); });
-})();
+function atualizarPontosUI() {
+    const pontos = usuarioAtual ? usuarioAtual.pontos : 0;
+    document.getElementById('pontosDisplayCab').textContent = `⭐ ${pontos}`;
+    const pg = document.getElementById('pontosGrandes');
+    if (pg) pg.textContent = `⭐ ${pontos}`;
+}
+
+// ---------- CALENDÁRIO ----------
+let mesAtual = new Date().getMonth();
+let anoAtual = new Date().getFullYear();
+function renderizarCalendario() {
+    const hoje = new Date();
+    const hojeStr = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}-${String(hoje.getDate()).padStart(2,'0')}`;
+    const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
+    const ultimoDia = new Date(anoAtual, mesAtual+1, 0).getDate();
+    const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    let html = `<div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;"><button class="btn" id="btnMesAnt">◀</button><span style="font-size:1.4rem; font-weight:700;">${meses[mesAtual]} ${anoAtual}</span><button class="btn" id="btnMesSeg">▶</button></div><table style="width:100%; text-align:center;"><thead><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr></thead><tbody>`;
+    let dia = 1;
+    for (let i = 0; i < 6; i++) {
+        html += '<tr>';
+        for (let j = 0; j < 7; j++) {
+            if (i === 0 && j < primeiroDia) html += '<td></td>';
+            else if (dia > ultimoDia) html += '<td></td>';
+            else {
+                const dataStr = `${anoAtual}-${String(mesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+                const tem = treinosCache[dataStr] ? 'style="background:#d4ede6; font-weight:700;"' : '';
+                const hojeClasse = dataStr === hojeStr ? 'style="border:3px solid #f4a261;"' : '';
+                html += `<td ${tem} ${hojeClasse} onclick="mostrarDetalhesDia('${dataStr}')">${dia}</td>`;
+                dia++;
+            }
+        }
+        html += '</tr>';
+        if (dia > ultimoDia) break;
+    }
+    html += '</tbody></table>';
+    document.getElementById('calendarioContainer').innerHTML = html;
+    document.getElementById('btnMesAnt').addEventListener('click', ()=>{ mesAtual--; if(mesAtual<0){mesAtual=11; anoAtual--;} renderizarCalendario(); });
+    document.getElementById('btnMesSeg').addEventListener('click', ()=>{ mesAtual++; if(mesAtual>11){mesAtual=0; anoAtual++;} renderizarCalendario(); });
+}
+
+window.mostrarDetalhesDia = function(dataStr) {
+    const [ano, mes, dia] = dataStr.split('-');
+    const lista = treinosCache[dataStr] || [];
+    let html = `<h3>${dia}/${mes}/${ano}</h3>`;
+    if (lista.length === 0) html += '<p>Sem treinos.</p>';
+    else {
+        html += '<div style="display:flex; flex-direction:column; gap:0.8rem;">';
+        lista.forEach((t, i) => {
+            const ex = exerciciosCatalogo.find(e => e.id === t.id);
+            const nome = ex ? ex.nome : t.id;
+            const status = t.status === 'completed' ? '✅' : '⏳';
+            html += `<div style="display:flex; justify-content:space-between; align-items:center; background:#f7f5f0; padding:0.8rem; border-radius:12px;">
+                <span>${ex?.emoji||'🏃'} ${nome} ${status}</span>
+                <div>
+                    ${t.status!=='completed' ? `<button class="btn" onclick="iniciarTreino('${dataStr}',${i})">▶</button>` : ''}
+                    <button class="btn btn-outline" onclick="removerTreino('${dataStr}',${i})">🗑️</button>
+                </div>
+            </div>`;
+        });
+        html += '</div>';
+    }
+    html += `<button class="btn" onclick="abrirModalAdicionar('${dataStr}')">➕ Adicionar</button>`;
+    document.getElementById('detalhesDia').innerHTML = html;
+};
+
+window.abrirModalAdicionar = function(dataStr) {
+    document.getElementById('gridAdicionar').innerHTML = exerciciosCatalogo.map(ex => `
+        <div class="card-ex" onclick="adicionarTreino('${dataStr}','${ex.id}')">
+            <div style="font-size:2rem;">${ex.emoji}</div>
+            <strong>${ex.nome}</strong>
+            <p style="font-size:0.9rem;">${ex.desc}</p>
+        </div>
+    `).join('');
+    document.getElementById('modalAdicionar').classList.add('ativo');
+};
+
+window.adicionarTreino = function(dataStr, exId) {
+    if (!treinosCache[dataStr]) treinosCache[dataStr] = [];
+    treinosCache[dataStr].push({ id: exId, status: 'planned', bonus: 0 });
+    salvarTreinosNoLocalStorage();
+    renderizarCalendario();
+    window.mostrarDetalhesDia(dataStr);
+    fecharModal('modalAdicionar');
+};
+
+window.removerTreino = function(dataStr, index) {
+    treinosCache[dataStr].splice(index,1);
+    if (treinosCache[dataStr].length === 0) delete treinosCache[dataStr];
+    salvarTreinosNoLocalStorage();
+    renderizarCalendario();
+    window.mostrarDetalhesDia(dataStr);
+};
+
+function salvarTreinosNoLocalStorage() {
+    const todos = JSON.parse(localStorage.getItem(STORAGE_TREINOS) || '{}');
+    todos[usuarioAtual.id] = treinosCache;
+    localStorage.setItem(STORAGE_TREINOS, JSON.stringify(todos));
+}
+
+// ---------- TREINO ----------
+let treinoAtual = null;
+let timerInterval, segundosTimer = 0, timerAtivo = false;
+window.iniciarTreino = function(dataStr, idx) {
+    const t = treinosCache[dataStr][idx];
+    const ex = exerciciosCatalogo.find(e => e.id === t.id);
+    treinoAtual = { dataStr, idx, ex };
+    document.getElementById('modalTitulo').textContent = `🏋️ ${ex.nome}`;
+    document.getElementById('videoWrapperTreino').innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
+    resetarTimer();
+    document.getElementById('bonusContainer').style.display = 'none';
+    document.getElementById('btnConcluir').style.display = 'block';
+    document.getElementById('modalTreino').classList.add('ativo');
+};
+function fecharModalTreino() { document.getElementById('modalTreino').classList.remove('ativo'); pausarTimer(); }
+function resetarTimer() { pausarTimer(); segundosTimer=0; document.getElementById('timerDisplay').textContent='00:00'; }
+function iniciarTimer() { if(!timerAtivo){ timerAtivo=true; timerInterval=setInterval(()=>{ segundosTimer++; const m=Math.floor(segundosTimer/60); const s=segundosTimer%60; document.getElementById('timerDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; },1000); } }
+function pausarTimer() { if(timerAtivo){ clearInterval(timerInterval); timerAtivo=false; } }
+document.getElementById('btnIniciarTimer').addEventListener('click', iniciarTimer);
+document.getElementById('btnPausarTimer').addEventListener('click', pausarTimer);
+document.getElementById('btnResetTimer').addEventListener('click', resetarTimer);
+document.getElementById('btnConcluir').addEventListener('click', ()=>{
+    if(!treinoAtual) return;
+    const { dataStr, idx } = treinoAtual;
+    const t = treinosCache[dataStr][idx];
+    if(t.status === 'completed') return;
+    t.status = 'completed';
+    usuarioAtual.pontos = (usuarioAtual.pontos || 0) + 1;
+    salvarTreinosNoLocalStorage();
+    atualizarUsuarioNoStorage();
+    atualizarPontosUI();
+    document.getElementById('bonusContainer').style.display = 'block';
+    document.getElementById('btnConcluir').style.display = 'none';
+    renderizarCalendario();
+    window.mostrarDetalhesDia(dataStr);
+});
+window.adicionarBonus = function(qtde) {
+    if(!treinoAtual) return;
+    const t = treinosCache[treinoAtual.dataStr][treinoAtual.idx];
+    if(t.bonus >= qtde) return;
+    t.bonus = qtde;
+    usuarioAtual.pontos += qtde;
+    salvarTreinosNoLocalStorage();
+    atualizarUsuarioNoStorage();
+    atualizarPontosUI();
+    document.getElementById('bonusContainer').innerHTML = '<p style="color:green;">🎉 +'+qtde+' pontos!</p>';
+    setTimeout(()=>{ document.getElementById('bonusContainer').style.display = 'none'; }, 2500);
+};
+
+function atualizarUsuarioNoStorage() {
+    const users = JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+    const idx = users.findIndex(u => u.id === usuarioAtual.id);
+    if (idx !== -1) {
+        users[idx] = usuarioAtual;
+        localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+    }
+    localStorage.setItem('mv_usuario_atual', JSON.stringify(usuarioAtual));
+}
+
+// ---------- CATÁLOGO ----------
+function renderizarCatalogo() {
+    document.getElementById('catalogoExercicios').innerHTML = exerciciosCatalogo.map(ex => `
+        <div class="card-ex" onclick="abrirExplicacao('${ex.id}')">
+            <div style="font-size:2rem;">${ex.emoji}</div>
+            <strong>${ex.nome}</strong>
+            <p style="font-size:0.9rem;">${ex.desc}</p>
+        </div>
+    `).join('');
+}
+window.abrirExplicacao = function(id) {
+    const ex = exerciciosCatalogo.find(e => e.id === id);
+    document.getElementById('modalVideoTitulo').textContent = `${ex.emoji} ${ex.nome}`;
+    document.getElementById('modalVideoDesc').textContent = ex.desc;
+    document.getElementById('modalVideoWrapper').innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
+    document.getElementById('modalVideo').classList.add('ativo');
+};
+
+// ---------- ADMIN ----------
+window.mostrarAdmin = () => {
+    const senha = prompt('Senha de administrador:');
+    if (senha !== localStorage.getItem(STORAGE_ADMIN_SENHA)) return alert('Senha incorreta!');
+    document.getElementById('interfaceApp').classList.add('oculto');
+    document.getElementById('interfaceAdmin').classList.remove('oculto');
+    document.getElementById('navPrincipal').classList.add('oculto');
+    carregarAdmin();
+};
+window.esconderAdmin = () => {
+    document.getElementById('interfaceAdmin').classList.add('oculto');
+    document.getElementById('interfaceApp').classList.remove('oculto');
+    document.getElementById('navPrincipal').classList.remove('oculto');
+};
+function carregarAdmin() {
+    exerciciosCatalogo = JSON.parse(localStorage.getItem(STORAGE_EXERCICIOS) || '[]');
+    renderAdminExercicios();
+    const users = JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+    document.getElementById('listaUsersAdmin').innerHTML = users.map(u => `<div>${u.nome} (${u.email}) - ${u.pontos} pts</div>`).join('');
+}
+function renderAdminExercicios() {
+    document.getElementById('listaExerciciosAdmin').innerHTML = exerciciosCatalogo.map((ex,i) => `
+        <div style="display:flex; justify-content:space-between; margin:0.5rem 0;">
+            <span>${ex.emoji} ${ex.nome}</span>
+            <div>
+                <button class="btn btn-outline" onclick="editarExercicioAdmin(${i})">✏️</button>
+                <button class="btn btn-danger" onclick="removerExercicioAdmin(${i})">🗑️</button>
+            </div>
+        </div>
+    `).join('');
+}
+window.mostrarFormAdicionar = () => {
+    document.getElementById('nomeEx').value = '';
+    document.getElementById('emojiEx').value = '';
+    document.getElementById('descEx').value = '';
+    document.getElementById('videoIdEx').value = '';
+    document.getElementById('editIndexEx').value = '-1';
+    document.getElementById('formExercicioAdmin').classList.remove('oculto');
+};
+window.cancelarFormAdmin = () => document.getElementById('formExercicioAdmin').classList.add('oculto');
+window.editarExercicioAdmin = (i) => {
+    const ex = exerciciosCatalogo[i];
+    document.getElementById('nomeEx').value = ex.nome;
+    document.getElementById('emojiEx').value = ex.emoji;
+    document.getElementById('descEx').value = ex.desc;
+    document.getElementById('videoIdEx').value = ex.videoId;
+    document.getElementById('editIndexEx').value = i;
+    document.getElementById('formExercicioAdmin').classList.remove('oculto');
+};
+window.salvarExercicioAdmin = () => {
+    const nome = document.getElementById('nomeEx').value.trim();
+    const emoji = document.getElementById('emojiEx').value.trim();
+    const desc = document.getElementById('descEx').value.trim();
+    const videoId = document.getElementById('videoIdEx').value.trim();
+    if (!nome || !emoji || !desc || !videoId) return alert('Preencha todos os campos.');
+    const novo = { id: nome.toLowerCase().replace(/\s+/g,'_'), nome, emoji, desc, videoId };
+    const idx = parseInt(document.getElementById('editIndexEx').value);
+    if (idx >= 0 && idx < exerciciosCatalogo.length) exerciciosCatalogo[idx] = novo;
+    else exerciciosCatalogo.push(novo);
+    localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exerciciosCatalogo));
+    renderAdminExercicios();
+    document.getElementById('formExercicioAdmin').classList.add('oculto');
+};
+window.removerExercicioAdmin = (i) => {
+    if (!confirm('Remover?')) return;
+    exerciciosCatalogo.splice(i,1);
+    localStorage.setItem(STORAGE_EXERCICIOS, JSON.stringify(exerciciosCatalogo));
+    renderAdminExercicios();
+};
+
+// ---------- NAVEGAÇÃO ----------
+window.mudarAba = (nome) => {
+    document.querySelectorAll('#interfaceApp .aba').forEach(a => a.classList.remove('ativa'));
+    document.getElementById('aba-'+nome).classList.add('ativa');
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('ativo'));
+    const indices = { inicio:0, calendario:1, exercicios:2, pontos:3 };
+    document.querySelectorAll('.nav-item')[indices[nome]].classList.add('ativo');
+    if (nome === 'calendario') renderizarCalendario();
+    if (nome === 'exercicios') renderizarCatalogo();
+};
+
+window.fecharModal = (id) => document.getElementById(id).classList.remove('ativo');
+window.addEventListener('click', (e) => { if (e.target.classList.contains('modal') && e.target.classList.contains('ativo')) e.target.classList.remove('ativo'); });
+
+// ---------- INIT ----------
+window.addEventListener('load', () => {
+    const saved = localStorage.getItem('mv_usuario_atual');
+    if (saved) {
+        usuarioAtual = JSON.parse(saved);
+        entrarApp();
+    }
+});
 </script>
 </body>
 </html>
