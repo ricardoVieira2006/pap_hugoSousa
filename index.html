@@ -5,256 +5,233 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimento em Casa 🏠💪</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
-            --fundo: #f9f7f3;
-            --texto: #2c2c2c;
-            --primaria: #1e5f5f;
-            --destaque: #f4a261;
-            --card: #fff;
-            --sombra: 0 8px 24px rgba(0,0,0,0.06);
-            --borda: #ddd6c8;
+            --fundo: #f9f7f3; --texto: #2c2c2c; --primaria: #1e5f5f; --destaque: #f4a261;
+            --card: #ffffff; --sombra: 0 6px 20px rgba(0,0,0,0.05); --borda: #ddd6c8;
             --fonte: 'Nunito', sans-serif;
-            --nav-height: 70px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background: var(--fundo); font-family: var(--fonte); color: var(--texto); padding-bottom: var(--nav-height); }
-        .app { max-width: 850px; margin: 0 auto; padding: 1.2rem; min-height: 100vh; }
-        .cabecalho {
-            background: linear-gradient(135deg, #1e5f5f, #2a8a7a); border-radius: 30px;
-            padding: 1.5rem; margin-bottom: 1.8rem; display: flex; align-items: center;
-            justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        body { background: var(--fundo); font-family: var(--fonte); color: var(--texto); }
+        .app { max-width: 800px; margin: 0 auto; padding: 1rem; min-height: 100vh; }
+
+        /* Cabeçalho */
+        .topo {
+            background: linear-gradient(135deg, #1e5f5f, #2a8a7a); border-radius: 24px;
+            padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .logo { font-size: 1.9rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
-        .btn-admin { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.5rem; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
-        .nav-principal {
-            position: fixed; bottom:0; left:0; right:0; background: white; display: flex;
-            justify-content: space-around; box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
-            border-top:1px solid var(--borda); height: var(--nav-height); z-index: 100;
+        .topo .logo { font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 0.4rem; }
+        .topo .acoes { display: flex; gap: 0.8rem; align-items: center; }
+        .btn-topo {
+            background: rgba(255,255,255,0.2); border: none; color: white; border-radius: 30px;
+            padding: 0.4rem 1rem; font-weight: 700; cursor: pointer; font-size: 0.9rem;
+            transition: 0.2s; display: flex; align-items: center; gap: 0.3rem;
         }
-        .nav-item {
-            background: none; border: none; font-size: 0.9rem; color: #777;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; font-weight: 600; gap: 0.2rem; flex:1; padding: 0.5rem 0;
-        }
-        .nav-item.ativo { color: var(--primaria); }
-        .aba { display: none; animation: fadeSlide 0.3s; }
-        .aba.ativa { display: block; }
-        @keyframes fadeSlide { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
-        .card { background: var(--card); border-radius: 24px; padding: 1.8rem; margin-bottom: 1.5rem; box-shadow: var(--sombra); border: 1px solid var(--borda); }
+        .btn-topo:hover { background: rgba(255,255,255,0.4); }
+
+        /* Conteúdo */
+        .card { background: var(--card); border-radius: 20px; padding: 1.5rem; margin-bottom: 1.2rem; box-shadow: var(--sombra); border: 1px solid var(--borda); }
+        h2 { color: var(--primaria); font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        h3 { color: #1e5f5f; margin: 1rem 0 0.5rem; font-size: 1.2rem; }
         .btn {
-            background: var(--primaria); color: white; border: none; border-radius: 40px;
-            padding: 0.7rem 1.5rem; font-weight: 700; cursor: pointer; transition: 0.2s;
-            display: inline-flex; align-items: center; gap: 0.4rem; font-size: 1rem;
+            background: var(--primaria); color: white; border: none; border-radius: 30px;
+            padding: 0.6rem 1.3rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+            display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.95rem;
         }
-        .btn:hover { background: #2a7a6e; }
+        .btn:hover { background: #2a7a6e; transform: translateY(-1px); }
         .btn-outline { background: transparent; color: var(--primaria); border: 2px solid var(--primaria); }
+        .btn-outline:hover { background: #e9f5f2; }
+        .btn-destaque { background: var(--destaque); } .btn-destaque:hover { background: #e07d3a; }
         .btn-danger { background: #c44; } .btn-danger:hover { background: #a33; }
+        .btn-grande { width: 100%; justify-content: center; padding: 0.8rem; font-size: 1.1rem; }
+
         input, select, textarea {
-            width: 100%; padding: 0.7rem; border-radius: 14px; border: 2px solid #ccc;
-            font-family: var(--fonte); font-size: 1rem; margin: 0.3rem 0 0.8rem;
+            width: 100%; padding: 0.6rem; border-radius: 12px; border: 2px solid #ccc;
+            font-family: var(--fonte); font-size: 1rem; margin: 0.3rem 0 0.7rem;
         }
-        label { font-weight: 700; display: block; margin-top: 0.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+        label { font-weight: 700; display: block; margin-top: 0.4rem; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; }
         .card-ex {
-            background: white; border-radius: 20px; padding: 1.2rem; text-align: center;
+            background: white; border-radius: 18px; padding: 1rem; text-align: center;
             border: 2px solid var(--borda); cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
         }
-        .card-ex:hover { transform: translateY(-5px); border-color: var(--destaque); }
-        .timer-display { font-size: 3rem; font-weight: 800; color: var(--primaria); text-align: center; font-family: monospace; }
+        .card-ex:hover { transform: translateY(-4px); border-color: var(--destaque); }
+        .card-ex img.ex-img {
+            width: 100%; height: 100px; object-fit: cover; border-radius: 12px; background: #eee;
+        }
+        .card-ex .img-ex { font-size: 2.5rem; }
+
+        .cal-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 1.3rem; font-weight: 700; color: var(--primaria); }
+        .cal-nav button { background: var(--primaria); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.1rem; }
+        table.cal { width: 100%; text-align: center; border-collapse: collapse; }
+        table.cal th { color: var(--primaria); padding: 0.5rem; font-weight: 800; }
+        table.cal td { padding: 0.6rem; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        table.cal td:hover { background: #e0f0ec; }
+        table.cal td.hoje { border: 3px solid var(--destaque); }
+        table.cal td.tem { background: #d4ede6; font-weight: 700; }
+
+        .timer-display { font-size: 2.5rem; font-weight: 800; color: var(--primaria); text-align: center; font-family: monospace; }
+
+        .imagem-demonstracao {
+            width: 100%; max-width: 400px; margin: 0 auto 1rem; border-radius: 16px;
+            overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .imagem-demonstracao img { width: 100%; display: block; }
+
+        .link-exercicio {
+            display: block; text-align: center; margin-top: 0.5rem; color: var(--primaria);
+            font-weight: 700; text-decoration: underline; font-size: 1rem;
+        }
+
         .modal {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); z-index:200;
-            align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.5); z-index:300; align-items: center; justify-content: center;
         }
         .modal.ativo { display: flex; }
-        .modal-conteudo {
-            background: white; border-radius: 28px; padding: 1.8rem; max-width: 650px;
-            width: 94%; max-height: 85vh; overflow-y: auto; position: relative;
+        .modal-box {
+            background: white; border-radius: 24px; padding: 1.5rem; max-width: 600px;
+            width: 92%; max-height: 85vh; overflow-y: auto; position: relative;
         }
         .modal-fechar {
-            position: absolute; top: 12px; right: 18px; font-size: 2.2rem;
+            position: absolute; top: 10px; right: 14px; font-size: 1.8rem;
             background: none; border: none; cursor: pointer; color: #888;
         }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height:0; overflow: hidden; border-radius: 16px; margin: 1rem 0; }
-        .video-wrapper iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
+
         .oculto { display: none !important; }
+        .admin-bar { background: #fff3e0; border-radius: 16px; padding: 0.8rem 1.2rem; margin-bottom: 1rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
     </style>
 </head>
 <body>
 <div class="app" id="appGeral">
-    <!-- Autenticação -->
-    <div id="telaAuth" class="card">
-        <h2>👤 Aceder ao Movimento em Casa</h2>
-        <div id="formLogin">
-            <label>Email</label><input type="email" id="loginEmail">
-            <label>Palavra‑passe</label><input type="password" id="loginSenha">
-            <button class="btn" onclick="login()">Entrar</button>
-            <p style="margin-top:0.5rem;">Não tem conta? <a href="#" onclick="mostrarRegisto()">Criar conta</a></p>
-        </div>
-        <div id="formRegisto" class="oculto">
-            <label>Nome</label><input type="text" id="regNome">
-            <label>Idade</label><input type="number" id="regIdade" min="50" max="120">
-            <label>Sexo</label><select id="regSexo"><option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select>
-            <label>Email</label><input type="email" id="regEmail">
-            <label>Palavra‑passe</label><input type="password" id="regSenha">
-            <button class="btn" onclick="registar()">Criar conta</button>
-            <p style="margin-top:0.5rem;">Já tem conta? <a href="#" onclick="mostrarLogin()">Entrar</a></p>
-        </div>
-        <p id="msgAuth" class="oculto" style="margin-top:1rem; font-weight:700;"></p>
-    </div>
-
-    <!-- App principal (oculta até login) -->
-    <div id="interfaceApp" class="oculto">
-        <div class="cabecalho">
+    <!-- ================= PAINEL PÚBLICO ================= -->
+    <div id="painelPublico">
+        <div class="topo">
             <div class="logo"><span>🏠💪</span> Movimento em Casa</div>
-            <div style="display:flex; gap:1rem; align-items:center;">
-                <span id="pontosDisplayCab" style="font-weight:700;">⭐ 0</span>
-                <span id="nomeUser" style="font-weight:700;"></span>
-                <button class="btn-admin" onclick="mostrarAdmin()" title="Admin">🔧</button>
+            <div class="acoes">
+                <span style="font-weight:700;" id="pontosDisplayCab">⭐ 0</span>
+                <button class="btn-topo" onclick="abrirLoginAdmin()">🔧 Admin</button>
             </div>
         </div>
-        <div class="aba ativa" id="aba-inicio"><div class="card"><h2>👋 Bem-vindo(a)!</h2><p>Explore o Calendário e os Exercícios.</p></div></div>
+
+        <!-- Abas de navegação -->
+        <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <button class="btn" onclick="mudarAba('inicio')">🏠 Início</button>
+            <button class="btn btn-outline" onclick="mudarAba('calendario')">📅 Calendário</button>
+            <button class="btn btn-outline" onclick="mudarAba('exercicios')">🤸 Exercícios</button>
+            <button class="btn btn-outline" onclick="mudarAba('pontos')">⭐ Pontos</button>
+        </div>
+
+        <div class="aba ativa" id="aba-inicio"><div class="card"><h2>👋 Bem-vindo(a)!</h2><p>Use o <strong>Calendário</strong> para planear os seus treinos. Cada exercício tem imagem e link para vídeo.</p></div></div>
         <div class="aba" id="aba-calendario"><div class="card"><h2>📅 Calendário</h2><div id="calendarioContainer"></div><div id="detalhesDia"></div></div></div>
-        <div class="aba" id="aba-exercicios"><div class="card"><h2>🤸 Exercícios</h2><div class="grid" id="catalogoExercicios"></div></div></div>
-        <div class="aba" id="aba-pontos"><div class="card"><h2>🏆 Pontos</h2><div style="font-size:3rem; text-align:center;" id="pontosGrandes">⭐ 0</div><p>+1 por treino, +2 repetições, +5 rápido.</p></div></div>
+        <div class="aba" id="aba-exercicios"><div class="card"><h2>🤸 Catálogo de Exercícios</h2><div class="grid" id="catalogoExercicios"></div></div></div>
+        <div class="aba" id="aba-pontos"><div class="card"><h2>🏆 Os Meus Pontos</h2><div style="font-size:3rem; text-align:center; margin:1rem 0; font-weight:800;" id="pontosGrandes">⭐ 0</div><p>Cada treino concluído = <strong>+1 ponto</strong>. Bónus: +2 (mais repetições) ou +5 (mais rápido).</p></div></div>
     </div>
 
-    <!-- Admin (oculta) -->
-    <div id="interfaceAdmin" class="oculto">
-        <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><h2>🔧 Admin</h2><button class="btn btn-outline" onclick="esconderAdmin()">Voltar</button></div>
-        <div class="card"><h3>Exercícios</h3><div id="listaExerciciosAdmin"></div><button class="btn" onclick="mostrarFormAdicionar()">➕ Novo</button></div>
+    <!-- ================= PAINEL ADMINISTRATIVO ================= -->
+    <div id="painelAdmin" class="oculto">
+        <div class="admin-bar">
+            <strong>🔧 Modo Administrador</strong>
+            <button class="btn btn-outline" onclick="sairAdmin()" style="margin-left:auto;">Voltar ao site</button>
+        </div>
+        <div class="card">
+            <h3>🏋️ Gerir Exercícios</h3>
+            <p style="font-size:0.9rem; color:#555;">As alterações são guardadas online e todos os visitantes as verão.</p>
+            <div id="listaExerciciosAdmin"></div>
+            <button class="btn" onclick="mostrarFormAdicionar()" style="margin-top:0.8rem;">➕ Novo Exercício</button>
+        </div>
         <div class="card oculto" id="formExercicioAdmin">
-            <label>Nome</label><input type="text" id="nomeEx">
-            <label>Emoji</label><input type="text" id="emojiEx">
-            <label>Descrição</label><textarea id="descEx" rows="3"></textarea>
-            <label>ID YouTube</label><input type="text" id="videoIdEx">
+            <h3 id="tituloFormAdmin">➕ Adicionar</h3>
+            <label>Nome do exercício</label><input type="text" id="nomeEx" placeholder="Ex: Levantar e Sentar">
+            <label>Emoji ou URL da imagem</label><input type="text" id="emojiEx" placeholder="🚶‍♂️ ou https://...">
+            <label>Descrição</label><textarea id="descEx" rows="2"></textarea>
+            <label>Link do vídeo no YouTube</label><input type="text" id="videoIdEx" placeholder="https://www.youtube.com/watch?v=...">
             <input type="hidden" id="editIndexEx" value="-1">
             <button class="btn" onclick="salvarExercicioAdmin()">💾 Guardar</button>
             <button class="btn btn-outline" onclick="cancelarFormAdmin()">Cancelar</button>
         </div>
-        <div class="card"><h3>Utilizadores</h3><div id="listaUsersAdmin"></div></div>
     </div>
 </div>
 
-<nav class="nav-principal" id="navPrincipal">
-    <button class="nav-item ativo" onclick="mudarAba('inicio')">🏠 Início</button>
-    <button class="nav-item" onclick="mudarAba('calendario')">📅 Calendário</button>
-    <button class="nav-item" onclick="mudarAba('exercicios')">🤸 Exercícios</button>
-    <button class="nav-item" onclick="mudarAba('pontos')">⭐ Pontos</button>
-</nav>
+<!-- ================= MODAL DE LOGIN ADMIN ================= -->
+<div class="modal" id="modalAdminLogin">
+    <div class="modal-box">
+        <button class="modal-fechar" onclick="fecharModal('modalAdminLogin')">×</button>
+        <h3>🔐 Login Administrativo</h3>
+        <label>Nome de utilizador</label><input type="text" id="adminUser" placeholder="admin">
+        <label>Palavra‑passe</label><input type="password" id="adminSenha">
+        <button class="btn btn-grande" onclick="loginAdmin()">Entrar</button>
+        <p id="msgAdmin" style="margin-top:0.8rem; font-weight:700; text-align:center;"></p>
+    </div>
+</div>
 
-<!-- Modais -->
-<div class="modal" id="modalVideo"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalVideo')">×</button><h3 id="modalVideoTitulo"></h3><p id="modalVideoDesc"></p><div class="video-wrapper" id="modalVideoWrapper"></div></div></div>
-<div class="modal" id="modalAdicionar"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModal('modalAdicionar')">×</button><h3>➕ Adicionar ao dia</h3><div class="grid" id="gridAdicionar"></div></div></div>
-<div class="modal" id="modalTreino"><div class="modal-conteudo"><button class="modal-fechar" onclick="fecharModalTreino()">×</button><h3 id="modalTitulo"></h3><div class="video-wrapper" id="videoWrapperTreino"></div><div class="timer-display" id="timerDisplay">00:00</div><div style="display:flex; gap:0.5rem; justify-content:center; margin:1rem 0;"><button class="btn" id="btnIniciarTimer">▶ Iniciar</button><button class="btn btn-outline" id="btnPausarTimer">⏸ Pausar</button><button class="btn btn-outline" id="btnResetTimer">↺ Reiniciar</button></div><button class="btn" style="width:100%;" id="btnConcluir">✅ Concluir (+1)</button><div id="bonusContainer" style="display:none; margin-top:1rem;"><p>🎉 +1 ponto. Mais?</p><button class="btn" onclick="adicionarBonus(2)">➕ +2</button><button class="btn" onclick="adicionarBonus(5)" style="margin-left:0.5rem;">⚡ +5</button></div></div></div>
+<!-- ================= MODAIS PÚBLICOS ================= -->
+<div class="modal" id="modalVideo"><div class="modal-box"><button class="modal-fechar" onclick="fecharModal('modalVideo')">×</button><h3 id="modalVideoTitulo"></h3><p id="modalVideoDesc"></p><div id="modalVideoImg" class="imagem-demonstracao"></div><a id="modalVideoLink" href="#" target="_blank" class="link-exercicio">▶ Ver vídeo no YouTube</a></div></div>
+<div class="modal" id="modalAdicionar"><div class="modal-box"><button class="modal-fechar" onclick="fecharModal('modalAdicionar')">×</button><h3>➕ Adicionar ao dia</h3><div class="grid" id="gridAdicionar"></div></div></div>
+<div class="modal" id="modalTreino"><div class="modal-box"><button class="modal-fechar" onclick="fecharModalTreino()">×</button><h3 id="modalTitulo"></h3><div id="videoWrapperTreinoImg" class="imagem-demonstracao"></div><a id="treinoVideoLink" href="#" target="_blank" class="link-exercicio">▶ Ver vídeo no YouTube</a><div class="timer-display" id="timerDisplay">00:00</div><div style="display:flex; gap:0.5rem; justify-content:center; margin:1rem 0;"><button class="btn" id="btnIniciarTimer">▶ Iniciar</button><button class="btn btn-outline" id="btnPausarTimer">⏸ Pausar</button><button class="btn btn-outline" id="btnResetTimer">↺ Reiniciar</button></div><button class="btn btn-grande" id="btnConcluir">✅ Concluir Treino (+1 ponto)</button><div id="bonusContainer" style="display:none; margin-top:1rem;"><p>🎉 Ganhou 1 ponto! Bónus extra?</p><button class="btn btn-destaque" onclick="adicionarBonus(2)">➕ +2 repetições</button><button class="btn btn-destaque" onclick="adicionarBonus(5)" style="margin-left:0.5rem;">⚡ +5 rápido</button></div></div></div>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <script>
-// ===================== CONFIGURAÇÃO =====================
-const SUPABASE_URL = 'https://SEU_PROJETO.supabase.co';
-const SUPABASE_KEY = 'SUA_CHAVE_ANONIMA';
-const ADMIN_PASSWORD = 'admin123';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// ================= CONFIGURAÇÃO DO FIREBASE =================
+const FIREBASE_API_KEY = 'AIzaSyBmDFXg0KxrdrdAeTJ2InhY82qb1Vk4sq8';
+const FIREBASE_DATABASE_URL = 'https://papa-90727-default-rtdb.firebaseio.com';
 
-// ===================== ESTADO =====================
-let usuarioAtual = null;
+firebase.initializeApp({ apiKey: FIREBASE_API_KEY, databaseURL: FIREBASE_DATABASE_URL });
+const db = firebase.database();
+
+// ================= ESTADO =================
 let exerciciosCatalogo = [];
-let treinosCache = {};  // chave: dataStr, valor: array de { localId, id: exId, status, bonus }
+let dadosPublico = JSON.parse(localStorage.getItem('mv_publico')) || { pontos: 0, treinos: {} };
+let treinosCache = dadosPublico.treinos || {};
+let mesAtual = new Date().getMonth();
+let anoAtual = new Date().getFullYear();
 
-// ===================== AUTENTICAÇÃO =====================
-async function login() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const senha = document.getElementById('loginSenha').value;
-    const { data, error } = await supabase.from('users').select('*').eq('email', email).eq('senha', senha).single();
-    if (error || !data) return mostrarMsgAuth('Email ou senha inválidos.', true);
-    usuarioAtual = data;
-    localStorage.setItem('mv_usuario_atual', JSON.stringify(usuarioAtual));
-    entrarApp();
-}
+const ADMIN_USER = 'admin';
+const ADMIN_SENHA = 'admin123';
 
-async function registar() {
-    const nome = document.getElementById('regNome').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const senha = document.getElementById('regSenha').value;
-    const idade = document.getElementById('regIdade').value;
-    const sexo = document.getElementById('regSexo').value;
-    if (!nome || !email || !senha) return mostrarMsgAuth('Preencha os campos obrigatórios.', true);
-    const { data: existente } = await supabase.from('users').select('id').eq('email', email).maybeSingle();
-    if (existente) return mostrarMsgAuth('Este email já está registado.', true);
-    const novo = { id: Date.now(), nome, email, senha, idade: idade || null, sexo: sexo || null, pontos: 0 };
-    const { error } = await supabase.from('users').insert([novo]);
-    if (error) return mostrarMsgAuth('Erro ao criar conta.', true);
-    mostrarMsgAuth('Conta criada! Faça login.', false);
-    mostrarLogin();
-}
-
-function mostrarMsgAuth(msg, erro) {
-    const p = document.getElementById('msgAuth');
-    p.textContent = msg; p.classList.remove('oculto');
-    p.style.color = erro ? '#c44' : '#1e5f5f';
-}
-function mostrarRegisto() {
-    document.getElementById('formLogin').classList.add('oculto');
-    document.getElementById('formRegisto').classList.remove('oculto');
-    document.getElementById('msgAuth').classList.add('oculto');
-}
-function mostrarLogin() {
-    document.getElementById('formRegisto').classList.add('oculto');
-    document.getElementById('formLogin').classList.remove('oculto');
-    document.getElementById('msgAuth').classList.add('oculto');
-}
-
-async function entrarApp() {
-    document.getElementById('telaAuth').classList.add('oculto');
-    document.getElementById('interfaceApp').classList.remove('oculto');
-    document.getElementById('navPrincipal').classList.remove('oculto');
-    document.getElementById('nomeUser').textContent = usuarioAtual.nome;
-    await carregarExercicios();
-    await carregarTreinos();
-    atualizarPontosUI();
-    renderizarCalendario();
-    renderizarCatalogo();
-}
-
+// ================= CARREGAR EXERCÍCIOS DO FIREBASE =================
 async function carregarExercicios() {
-    const { data } = await supabase.from('exercicios').select('*');
-    exerciciosCatalogo = data || [];
-}
-async function carregarTreinos() {
-    const { data } = await supabase.from('treinos').select('*').eq('user_id', usuarioAtual.id);
-    treinosCache = {};
-    if (data) {
-        data.forEach(t => {
-            if (!treinosCache[t.data]) treinosCache[t.data] = [];
-            treinosCache[t.data].push({
-                localId: t.id,        // ID único gerado por nós
-                id: t.exercicio_id,
-                status: t.status,
-                bonus: t.bonus || 0
-            });
-        });
+    const snap = await db.ref('exercicios').once('value');
+    const dados = snap.val();
+    exerciciosCatalogo = dados ? Object.values(dados) : [];
+    if (exerciciosCatalogo.length === 0) {
+        const padrao = [
+            { id: 'caminhar', nome: 'Caminhar em casa', emoji: 'https://cdn-icons-png.flaticon.com/512/3448/3448552.png', descricao: 'Caminhe 5–10 min, várias vezes ao dia.', video_id: 'https://www.youtube.com/watch?v=L4BzFh9kQQY' },
+            { id: 'levantar', nome: 'Levantar e Sentar', emoji: 'https://cdn-icons-png.flaticon.com/512/2997/2997517.png', descricao: 'Numa cadeira firme, 8–10 repetições.', video_id: 'https://www.youtube.com/watch?v=8m5H0W0Q0Xs' },
+            { id: 'bracos', nome: 'Elevar os Braços', emoji: 'https://cdn-icons-png.flaticon.com/512/2548/2548561.png', descricao: 'Com ou sem garrafas de água.', video_id: 'https://www.youtube.com/watch?v=6gV9v7JxK8Y' },
+            { id: 'alongar', nome: 'Alongamentos Suaves', emoji: 'https://cdn-icons-png.flaticon.com/512/2964/2964514.png', descricao: 'Pescoço, braços e pernas lentamente.', video_id: 'https://www.youtube.com/watch?v=a1b2c3d4e5f' },
+            { id: 'equilibrio', nome: 'Treino de Equilíbrio', emoji: 'https://cdn-icons-png.flaticon.com/512/3448/3448621.png', descricao: 'Apoie-se 10–15 seg.', video_id: 'https://www.youtube.com/watch?v=f6g7h8i9j0k' },
+            { id: 'escadas', nome: 'Subir/Descer Escadas', emoji: 'https://cdn-icons-png.flaticon.com/512/2972/2972314.png', descricao: 'Com segurança.', video_id: 'https://www.youtube.com/watch?v=l1m2n3o4p5q' },
+            { id: 'ombros', nome: 'Rotação de Ombros', emoji: 'https://cdn-icons-png.flaticon.com/512/3448/3448111.png', descricao: 'Gire os ombros 10x cada lado.', video_id: 'https://www.youtube.com/watch?v=r6s7t8u9v0w' },
+            { id: 'pernas', nome: 'Flexão de Pernas', emoji: 'https://cdn-icons-png.flaticon.com/512/2964/2964538.png', descricao: 'Sentado, estique e dobre a perna, 10x.', video_id: 'https://www.youtube.com/watch?v=x1y2z3a4b5c' },
+        ];
+        padrao.forEach(ex => db.ref('exercicios/' + ex.id).set(ex));
+        exerciciosCatalogo = padrao;
     }
 }
 
+// ================= PONTOS (LOCAIS) =================
 function atualizarPontosUI() {
-    const pts = usuarioAtual ? usuarioAtual.pontos : 0;
-    document.getElementById('pontosDisplayCab').textContent = `⭐ ${pts}`;
-    const pg = document.getElementById('pontosGrandes');
-    if (pg) pg.textContent = `⭐ ${pts}`;
+    document.getElementById('pontosDisplayCab').textContent = `⭐ ${dadosPublico.pontos}`;
+    document.getElementById('pontosGrandes').textContent = `⭐ ${dadosPublico.pontos}`;
+}
+function salvarDadosPublico() {
+    dadosPublico.treinos = treinosCache;
+    localStorage.setItem('mv_publico', JSON.stringify(dadosPublico));
 }
 
-// ===================== CALENDÁRIO =====================
-let mesAtual = new Date().getMonth();
-let anoAtual = new Date().getFullYear();
+// ================= CALENDÁRIO =================
 function renderizarCalendario() {
     const hoje = new Date();
     const hojeStr = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}-${String(hoje.getDate()).padStart(2,'0')}`;
     const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
     const ultimoDia = new Date(anoAtual, mesAtual+1, 0).getDate();
     const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-    let html = `<div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;"><button class="btn" id="btnMesAnt">◀</button><span style="font-size:1.4rem; font-weight:700;">${meses[mesAtual]} ${anoAtual}</span><button class="btn" id="btnMesSeg">▶</button></div><table style="width:100%; text-align:center;"><thead><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr></thead><tbody>`;
+    let html = `<div class="cal-nav"><button id="btnMesAnt">◀</button><span>${meses[mesAtual]} ${anoAtual}</span><button id="btnMesSeg">▶</button></div><table class="cal"><thead><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr></thead><tbody>`;
     let dia = 1;
     for (let i = 0; i < 6; i++) {
         html += '<tr>';
@@ -263,9 +240,9 @@ function renderizarCalendario() {
             else if (dia > ultimoDia) html += '<td></td>';
             else {
                 const dataStr = `${anoAtual}-${String(mesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-                const tem = treinosCache[dataStr] ? 'style="background:#d4ede6; font-weight:700;"' : '';
-                const hojeClasse = dataStr === hojeStr ? 'style="border:3px solid #f4a261;"' : '';
-                html += `<td ${tem} ${hojeClasse} onclick="mostrarDetalhesDia('${dataStr}')">${dia}</td>`;
+                const tem = treinosCache[dataStr] ? 'tem' : '';
+                const hojeClasse = dataStr === hojeStr ? 'hoje' : '';
+                html += `<td class="${tem} ${hojeClasse}" style="cursor:pointer;" onclick="mostrarDetalhesDia('${dataStr}')">${dia}</td>`;
                 dia++;
             }
         }
@@ -274,77 +251,70 @@ function renderizarCalendario() {
     }
     html += '</tbody></table>';
     document.getElementById('calendarioContainer').innerHTML = html;
-    document.getElementById('btnMesAnt').addEventListener('click', ()=>{ mesAtual--; if(mesAtual<0){mesAtual=11; anoAtual--;} renderizarCalendario(); });
-    document.getElementById('btnMesSeg').addEventListener('click', ()=>{ mesAtual++; if(mesAtual>11){mesAtual=0; anoAtual++;} renderizarCalendario(); });
+    document.getElementById('btnMesAnt').addEventListener('click', ()=>{ mesAtual--; if(mesAtual<0){mesAtual=11;anoAtual--;} renderizarCalendario(); });
+    document.getElementById('btnMesSeg').addEventListener('click', ()=>{ mesAtual++; if(mesAtual>11){mesAtual=0;anoAtual++;} renderizarCalendario(); });
 }
 
-window.mostrarDetalhesDia = function(dataStr) {
+function mostrarDetalhesDia(dataStr) {
     const [ano, mes, dia] = dataStr.split('-');
     const lista = treinosCache[dataStr] || [];
     let html = `<h3>${dia}/${mes}/${ano}</h3>`;
-    if (lista.length === 0) html += '<p>Sem treinos.</p>';
+    if (lista.length === 0) html += '<p>Nenhum treino planeado.</p>';
     else {
-        html += '<div style="display:flex; flex-direction:column; gap:0.8rem;">';
+        html += '<div style="display:flex; flex-direction:column; gap:0.6rem;">';
         lista.forEach((t, i) => {
             const ex = exerciciosCatalogo.find(e => e.id === t.id);
             const nome = ex ? ex.nome : t.id;
             const status = t.status === 'completed' ? '✅' : '⏳';
-            html += `<div style="display:flex; justify-content:space-between; align-items:center; background:#f7f5f0; padding:0.8rem; border-radius:12px;">
-                <span>${ex?.emoji||'🏃'} ${nome} ${status}</span>
+            html += `<div style="display:flex; justify-content:space-between; align-items:center; background:#f9f7f2; padding:0.7rem; border-radius:14px;">
+                <span>${ex?.emoji?.startsWith('http') ? `<img src="${ex.emoji}" style="width:30px;height:30px;border-radius:6px;">` : ex?.emoji||'🏃'} ${nome} ${status}</span>
                 <div>
-                    ${t.status!=='completed' ? `<button class="btn" onclick="iniciarTreino('${dataStr}',${i})">▶</button>` : ''}
+                    ${t.status!=='completed' ? `<button class="btn" onclick="iniciarTreino('${dataStr}',${i})">▶ Iniciar</button>` : ''}
                     <button class="btn btn-outline" onclick="removerTreino('${dataStr}',${i})">🗑️</button>
                 </div>
             </div>`;
         });
         html += '</div>';
     }
-    html += `<button class="btn" onclick="abrirModalAdicionar('${dataStr}')">➕ Adicionar</button>`;
+    html += `<button class="btn" onclick="abrirModalAdicionar('${dataStr}')" style="margin-top:0.8rem;">➕ Adicionar exercício</button>`;
     document.getElementById('detalhesDia').innerHTML = html;
-};
+}
 
-window.abrirModalAdicionar = function(dataStr) {
-    document.getElementById('gridAdicionar').innerHTML = exerciciosCatalogo.map(ex => `
-        <div class="card-ex" onclick="adicionarTreino('${dataStr}','${ex.id}')">
-            <div style="font-size:2rem;">${ex.emoji}</div>
-            <strong>${ex.nome}</strong>
-            <p style="font-size:0.9rem;">${ex.desc}</p>
-        </div>
-    `).join('');
+function abrirModalAdicionar(dataStr) {
+    document.getElementById('gridAdicionar').innerHTML = exerciciosCatalogo.map(ex => {
+        const imagem = ex.emoji?.startsWith('http') ? `<img src="${ex.emoji}" class="ex-img" alt="${ex.nome}">` : `<div class="img-ex">${ex.emoji || '🏃'}</div>`;
+        return `<div class="card-ex" onclick="adicionarTreino('${dataStr}','${ex.id}')">${imagem}<strong>${ex.nome}</strong><p style="font-size:0.85rem;">${ex.descricao || ''}</p></div>`;
+    }).join('');
     document.getElementById('modalAdicionar').classList.add('ativo');
-};
-
-window.adicionarTreino = async function(dataStr, exId) {
-    const localId = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-    const novoTreino = { id: localId, user_id: usuarioAtual.id, data: dataStr, exercicio_id: exId, status: 'planned', bonus: 0 };
-    const { error } = await supabase.from('treinos').insert([novoTreino]);
-    if (error) return alert('Erro ao adicionar treino.');
+}
+function adicionarTreino(dataStr, exId) {
     if (!treinosCache[dataStr]) treinosCache[dataStr] = [];
-    treinosCache[dataStr].push({ localId, id: exId, status: 'planned', bonus: 0 });
+    treinosCache[dataStr].push({ id: exId, status: 'planned', bonus: 0 });
+    salvarDadosPublico();
     renderizarCalendario();
-    window.mostrarDetalhesDia(dataStr);
+    mostrarDetalhesDia(dataStr);
     fecharModal('modalAdicionar');
-};
-
-window.removerTreino = async function(dataStr, index) {
-    const treino = treinosCache[dataStr][index];
-    await supabase.from('treinos').delete().eq('id', treino.localId);
-    treinosCache[dataStr].splice(index, 1);
+}
+function removerTreino(dataStr, index) {
+    treinosCache[dataStr].splice(index,1);
     if (treinosCache[dataStr].length === 0) delete treinosCache[dataStr];
+    salvarDadosPublico();
     renderizarCalendario();
-    window.mostrarDetalhesDia(dataStr);
-};
+    mostrarDetalhesDia(dataStr);
+}
 
-// ===================== MODAL DE TREINO =====================
+// ================= TREINO (TEMPORIZADOR) =================
 let treinoAtual = null;
 let timerInterval, segundosTimer = 0, timerAtivo = false;
 window.iniciarTreino = function(dataStr, idx) {
     const t = treinosCache[dataStr][idx];
     const ex = exerciciosCatalogo.find(e => e.id === t.id);
     if (!ex) return;
-    treinoAtual = { dataStr, idx, localId: t.localId, ex };
+    treinoAtual = { dataStr, idx, ex };
     document.getElementById('modalTitulo').textContent = `🏋️ ${ex.nome}`;
-    document.getElementById('videoWrapperTreino').innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
+    const img = ex.emoji?.startsWith('http') ? `<img src="${ex.emoji}" style="width:100%;border-radius:14px;">` : `<div style="font-size:3rem;text-align:center;">${ex.emoji || '🏃'}</div>`;
+    document.getElementById('videoWrapperTreinoImg').innerHTML = img;
+    document.getElementById('treinoVideoLink').href = ex.video_id || '#';
     resetarTimer();
     document.getElementById('bonusContainer').style.display = 'none';
     document.getElementById('btnConcluir').style.display = 'block';
@@ -357,88 +327,92 @@ function pausarTimer() { if(timerAtivo){ clearInterval(timerInterval); timerAtiv
 document.getElementById('btnIniciarTimer').addEventListener('click', iniciarTimer);
 document.getElementById('btnPausarTimer').addEventListener('click', pausarTimer);
 document.getElementById('btnResetTimer').addEventListener('click', resetarTimer);
-document.getElementById('btnConcluir').addEventListener('click', async ()=>{
+document.getElementById('btnConcluir').addEventListener('click', ()=>{
     if(!treinoAtual) return;
-    const { dataStr, idx, localId } = treinoAtual;
+    const { dataStr, idx } = treinoAtual;
     const t = treinosCache[dataStr][idx];
     if(t.status === 'completed') return;
     t.status = 'completed';
-    usuarioAtual.pontos = (usuarioAtual.pontos || 0) + 1;
-    await supabase.from('treinos').update({ status: 'completed' }).eq('id', localId);
-    await supabase.from('users').update({ pontos: usuarioAtual.pontos }).eq('id', usuarioAtual.id);
-    localStorage.setItem('mv_usuario_atual', JSON.stringify(usuarioAtual));
+    dadosPublico.pontos += 1;
+    salvarDadosPublico();
     atualizarPontosUI();
     document.getElementById('bonusContainer').style.display = 'block';
     document.getElementById('btnConcluir').style.display = 'none';
     renderizarCalendario();
-    window.mostrarDetalhesDia(dataStr);
+    mostrarDetalhesDia(dataStr);
 });
-window.adicionarBonus = async function(qtde) {
+window.adicionarBonus = function(qtde) {
     if(!treinoAtual) return;
-    const { dataStr, idx, localId } = treinoAtual;
-    const t = treinosCache[dataStr][idx];
+    const t = treinosCache[treinoAtual.dataStr][treinoAtual.idx];
     if(t.bonus >= qtde) return;
     t.bonus = qtde;
-    usuarioAtual.pontos += qtde;
-    await supabase.from('treinos').update({ bonus: qtde }).eq('id', localId);
-    await supabase.from('users').update({ pontos: usuarioAtual.pontos }).eq('id', usuarioAtual.id);
-    localStorage.setItem('mv_usuario_atual', JSON.stringify(usuarioAtual));
+    dadosPublico.pontos += qtde;
+    salvarDadosPublico();
     atualizarPontosUI();
     document.getElementById('bonusContainer').innerHTML = '<p style="color:green;">🎉 +'+qtde+' pontos!</p>';
     setTimeout(()=>{ document.getElementById('bonusContainer').style.display = 'none'; }, 2500);
 };
 
-// ===================== CATÁLOGO =====================
+// ================= CATÁLOGO =================
 function renderizarCatalogo() {
-    document.getElementById('catalogoExercicios').innerHTML = exerciciosCatalogo.map(ex => `
-        <div class="card-ex" onclick="abrirExplicacao('${ex.id}')">
-            <div style="font-size:2rem;">${ex.emoji}</div>
-            <strong>${ex.nome}</strong>
-            <p style="font-size:0.9rem;">${ex.desc}</p>
-        </div>
-    `).join('');
+    document.getElementById('catalogoExercicios').innerHTML = exerciciosCatalogo.map(ex => {
+        const imagem = ex.emoji?.startsWith('http') ? `<img src="${ex.emoji}" class="ex-img" alt="${ex.nome}">` : `<div class="img-ex">${ex.emoji || '🏃'}</div>`;
+        return `<div class="card-ex" onclick="abrirExplicacao('${ex.id}')">${imagem}<strong>${ex.nome}</strong><p style="font-size:0.85rem;">${ex.descricao || ''}</p></div>`;
+    }).join('');
 }
-window.abrirExplicacao = function(id) {
+function abrirExplicacao(id) {
     const ex = exerciciosCatalogo.find(e => e.id === id);
     if (!ex) return;
-    document.getElementById('modalVideoTitulo').textContent = `${ex.emoji} ${ex.nome}`;
-    document.getElementById('modalVideoDesc').textContent = ex.desc;
-    document.getElementById('modalVideoWrapper').innerHTML = `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>`;
+    document.getElementById('modalVideoTitulo').textContent = ex.nome;
+    document.getElementById('modalVideoDesc').textContent = ex.descricao || '';
+    const img = ex.emoji?.startsWith('http') ? `<img src="${ex.emoji}" style="width:100%;border-radius:14px;">` : `<div style="font-size:3rem;text-align:center;">${ex.emoji || '🏃'}</div>`;
+    document.getElementById('modalVideoImg').innerHTML = img;
+    document.getElementById('modalVideoLink').href = ex.video_id || '#';
     document.getElementById('modalVideo').classList.add('ativo');
-};
-
-// ===================== ADMIN =====================
-window.mostrarAdmin = () => {
-    const senha = prompt('Senha de administrador:');
-    if (senha !== ADMIN_PASSWORD) return alert('Senha incorreta!');
-    document.getElementById('interfaceApp').classList.add('oculto');
-    document.getElementById('interfaceAdmin').classList.remove('oculto');
-    document.getElementById('navPrincipal').classList.add('oculto');
-    carregarAdmin();
-};
-window.esconderAdmin = () => {
-    document.getElementById('interfaceAdmin').classList.add('oculto');
-    document.getElementById('interfaceApp').classList.remove('oculto');
-    document.getElementById('navPrincipal').classList.remove('oculto');
-};
-async function carregarAdmin() {
-    await carregarExercicios();
-    renderAdminExercicios();
-    const { data: users } = await supabase.from('users').select('nome, email, pontos');
-    document.getElementById('listaUsersAdmin').innerHTML = users ? users.map(u => `<div>${u.nome} (${u.email}) - ${u.pontos} pts</div>`).join('') : '';
 }
-function renderAdminExercicios() {
-    document.getElementById('listaExerciciosAdmin').innerHTML = exerciciosCatalogo.map((ex,i) => `
-        <div style="display:flex; justify-content:space-between; margin:0.5rem 0;">
-            <span>${ex.emoji} ${ex.nome}</span>
+
+// ================= ADMINISTRAÇÃO =================
+window.abrirLoginAdmin = () => {
+    document.getElementById('adminUser').value = '';
+    document.getElementById('adminSenha').value = '';
+    document.getElementById('msgAdmin').textContent = '';
+    document.getElementById('modalAdminLogin').classList.add('ativo');
+};
+window.loginAdmin = function() {
+    const user = document.getElementById('adminUser').value.trim();
+    const senha = document.getElementById('adminSenha').value;
+    if (user === ADMIN_USER && senha === ADMIN_SENHA) {
+        document.getElementById('modalAdminLogin').classList.remove('ativo');
+        document.getElementById('painelPublico').classList.add('oculto');
+        document.getElementById('painelAdmin').classList.remove('oculto');
+        renderAdminExercicios();
+    } else {
+        document.getElementById('msgAdmin').textContent = 'Nome de utilizador ou senha incorretos.';
+    }
+};
+window.sairAdmin = async function() {
+    document.getElementById('painelAdmin').classList.add('oculto');
+    document.getElementById('painelPublico').classList.remove('oculto');
+    await carregarExercicios();
+    renderizarCatalogo();
+    renderizarCalendario();
+    atualizarPontosUI();
+};
+async function renderAdminExercicios() {
+    await carregarExercicios();
+    document.getElementById('listaExerciciosAdmin').innerHTML = exerciciosCatalogo.map((ex, i) => {
+        const img = ex.emoji?.startsWith('http') ? `<img src="${ex.emoji}" style="width:30px;height:30px;border-radius:4px;">` : ex.emoji || '🏃';
+        return `<div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid #eee;">
+            <span>${img} <strong>${ex.nome}</strong></span>
             <div>
-                <button class="btn btn-outline" onclick="editarExercicioAdmin(${i})">✏️</button>
-                <button class="btn btn-danger" onclick="removerExercicioAdmin(${i})">🗑️</button>
+                <button class="btn btn-outline" onclick="editarExercicioAdmin(${i})" style="padding:0.3rem 0.7rem;">✏️</button>
+                <button class="btn btn-danger" onclick="removerExercicioAdmin(${i})" style="padding:0.3rem 0.7rem;">🗑️</button>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 }
 window.mostrarFormAdicionar = () => {
+    document.getElementById('tituloFormAdmin').textContent = '➕ Novo Exercício';
     document.getElementById('nomeEx').value = '';
     document.getElementById('emojiEx').value = '';
     document.getElementById('descEx').value = '';
@@ -447,60 +421,65 @@ window.mostrarFormAdicionar = () => {
     document.getElementById('formExercicioAdmin').classList.remove('oculto');
 };
 window.cancelarFormAdmin = () => document.getElementById('formExercicioAdmin').classList.add('oculto');
-window.editarExercicioAdmin = (i) => {
+window.editarExercicioAdmin = function(i) {
     const ex = exerciciosCatalogo[i];
+    document.getElementById('tituloFormAdmin').textContent = '✏️ Editar Exercício';
     document.getElementById('nomeEx').value = ex.nome;
-    document.getElementById('emojiEx').value = ex.emoji;
-    document.getElementById('descEx').value = ex.desc;
-    document.getElementById('videoIdEx').value = ex.video_id;   // campo é video_id
+    document.getElementById('emojiEx').value = ex.emoji || '';
+    document.getElementById('descEx').value = ex.descricao || '';
+    document.getElementById('videoIdEx').value = ex.video_id || '';
     document.getElementById('editIndexEx').value = i;
     document.getElementById('formExercicioAdmin').classList.remove('oculto');
 };
-window.salvarExercicioAdmin = async () => {
+window.salvarExercicioAdmin = async function() {
     const nome = document.getElementById('nomeEx').value.trim();
     const emoji = document.getElementById('emojiEx').value.trim();
-    const desc = document.getElementById('descEx').value.trim();
-    const videoId = document.getElementById('videoIdEx').value.trim();
-    if (!nome || !emoji || !desc || !videoId) return alert('Preencha todos os campos.');
-    const id = nome.toLowerCase().replace(/\s+/g,'_');
+    const descricao = document.getElementById('descEx').value.trim();
+    const video_id = document.getElementById('videoIdEx').value.trim();
+    if (!nome || !video_id) return alert('Preencha o nome e o link do vídeo.');
+    const id = nome.toLowerCase().replace(/\s+/g, '_');
+    const novo = { id, nome, emoji: emoji || '🏃', descricao, video_id };
     const idx = parseInt(document.getElementById('editIndexEx').value);
-    if (idx >= 0 && idx < exerciciosCatalogo.length) {
-        await supabase.from('exercicios').update({ nome, emoji, descricao: desc, video_id: videoId }).eq('id', id);
-    } else {
-        await supabase.from('exercicios').insert([{ id, nome, emoji, descricao: desc, video_id: videoId }]);
+    try {
+        if (idx >= 0 && idx < exerciciosCatalogo.length) {
+            await db.ref('exercicios/' + exerciciosCatalogo[idx].id).remove();
+        }
+        await db.ref('exercicios/' + id).set(novo);
+    } catch(e) {
+        alert('Erro ao guardar: ' + e.message);
+        return;
     }
+    document.getElementById('formExercicioAdmin').classList.add('oculto');
     await carregarExercicios();
     renderAdminExercicios();
-    document.getElementById('formExercicioAdmin').classList.add('oculto');
 };
-window.removerExercicioAdmin = async (i) => {
-    if (!confirm('Remover?')) return;
-    const ex = exerciciosCatalogo[i];
-    await supabase.from('exercicios').delete().eq('id', ex.id);
+window.removerExercicioAdmin = async function(i) {
+    if (!confirm('Remover este exercício?')) return;
+    try {
+        await db.ref('exercicios/' + exerciciosCatalogo[i].id).remove();
+    } catch(e) {
+        alert('Erro ao remover: ' + e.message);
+        return;
+    }
     await carregarExercicios();
     renderAdminExercicios();
 };
 
-// ===================== NAVEGAÇÃO =====================
-window.mudarAba = (nome) => {
-    document.querySelectorAll('#interfaceApp .aba').forEach(a => a.classList.remove('ativa'));
+// ================= NAVEGAÇÃO =================
+window.mudarAba = function(nome) {
+    document.querySelectorAll('#painelPublico .aba').forEach(a => a.classList.remove('ativa'));
     document.getElementById('aba-'+nome).classList.add('ativa');
-    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('ativo'));
-    const indices = { inicio:0, calendario:1, exercicios:2, pontos:3 };
-    document.querySelectorAll('.nav-item')[indices[nome]].classList.add('ativo');
     if (nome === 'calendario') renderizarCalendario();
     if (nome === 'exercicios') renderizarCatalogo();
 };
-window.fecharModal = (id) => document.getElementById(id).classList.remove('ativo');
+window.fecharModal = function(id) { document.getElementById(id).classList.remove('ativo'); };
 window.addEventListener('click', (e) => { if (e.target.classList.contains('modal') && e.target.classList.contains('ativo')) e.target.classList.remove('ativo'); });
 
-// ===================== INIT =====================
-window.addEventListener('load', async () => {
-    const saved = localStorage.getItem('mv_usuario_atual');
-    if (saved) {
-        usuarioAtual = JSON.parse(saved);
-        await entrarApp();
-    }
+// ================= INICIAR =================
+carregarExercicios().then(() => {
+    atualizarPontosUI();
+    renderizarCalendario();
+    renderizarCatalogo();
 });
 </script>
 </body>
